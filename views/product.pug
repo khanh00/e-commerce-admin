@@ -1,0 +1,225 @@
+extends base
+
+block content
+
+  .content
+    section.section
+      .header-section
+        h1.header-section__heading Danh sách
+        button.btn.btn--red
+          i.fas.fa-trash.btn__icon
+          |             Xóa sách
+        button.btn.btn--blue
+          i.fas.fa-plus-square.btn__icon
+          |             Thêm sách
+        button.btn
+          i.fas.fa-cloud-download-alt.btn__icon
+          |             Xuất file
+
+
+      .filter-container
+        .filter
+          i.fas.fa-sliders-h
+          span Bộ lọc
+
+        .pagination
+          .pagination-info
+            | Hiện
+            select#limit
+              option(value="10" selected) 10
+              option(value="20") 20
+              option(value="50") 50
+              option(value="100") 100
+            |  từ 
+            span 
+            | -
+            span 
+            |  trên 
+            span 
+            |  kết quả
+
+      .table-wrapper
+        table.table
+          thead.table__head
+            tr.table__row
+              th.table__heading
+                .checkbox
+                  i.checkbox__icon.far.fa-square
+                  i.checkbox__icon.far.fa-check-square.display-n
+              th.table__heading
+                .table__cell
+                  span.table__name Tên sách
+                  .table__icon-box
+                    i.fas.fa-sort-up.table__icon-sort
+                    i.fas.fa-sort-down.table__icon-sort
+              th.table__heading
+                .table__cell
+                  span.table__name Thể loại
+                  .table__icon-box
+                    i.fas.fa-sort-up.table__icon-sort
+                    i.fas.fa-sort-down.table__icon-sort
+              th.table__heading
+                .table__cell
+                  span.table__name Giá bán
+                  .table__icon-box
+                    i.fas.fa-sort-up.table__icon-sort
+                    i.fas.fa-sort-down.table__icon-sort
+              th.table__heading
+                .table__cell
+                  span.table__name Giá nhập
+                  .table__icon-box
+                    i.fas.fa-sort-up.table__icon-sort
+                    i.fas.fa-sort-down.table__icon-sort
+              th.table__heading
+                .table__cell
+                  span.table__name Tồn kho
+                  .table__icon-box
+                    i.fas.fa-sort-up.table__icon-sort
+                    i.fas.fa-sort-down.table__icon-sort
+              th.table__heading
+                .table__cell
+                  span.table__name Trạng thái
+                  .table__icon-box
+                    i.fas.fa-sort-up.table__icon-sort
+                    i.fas.fa-sort-down.table__icon-sort
+              th.table__heading
+                .table__cell
+                  span.table__name Cập nhật
+                  .table__icon-box
+                    i.fas.fa-sort-up.table__icon-sort
+                    i.fas.fa-sort-down.table__icon-sort
+              th.table__heading
+          tbody.table__body
+
+      .pagination
+        .paginate
+
+  .form-container.overlay.hidden
+    form.form.hidden-animate
+      .form-header
+        h4.form-header__heading.form-header__heading--active
+          i.fas.fa-box
+          span Thông tin cơ bản
+        h4.form-header__heading
+          i.fas.fa-sitemap
+          span Thuộc tính
+        h4.form-header__heading
+          i.fas.fa-file-alt
+          span Mô tả
+        h4.form-header__heading
+          i.fas.fa-dollar-sign
+          span Giá
+        h4.form-header__heading
+          i.fas.fa-images
+          span Hình ảnh
+      .form-body
+        .form-body__content.form-body__content--active(data-index=1)
+          .form-body__wrapper
+            label.form-body__label(for='title')
+              span * 
+              | Tiêu đề
+            input#title.form-body__input(type='text' name='title')
+          .form-body__wrapper
+            label.form-body__label(for='isbn')
+              span * 
+              | Mã isbn
+            input#isbn.form-body__input(type='number' name='isbn')
+          .form-body__wrapper
+            label.form-body__label Thể loại
+            .option
+              .option__selected
+                #category.option__name= categories[0].name
+                i.option__icon.fas.fa-chevron-down.fa-fw
+              .option__select.hidden
+                each category in categories
+                  .option__name= category.name
+          .form-body__wrapper
+            label.form-body__label(for='authors') Tác giả
+            input#authors.form-body__input(type='text' name='authors')
+          .form-body__wrapper
+            label.form-body__label(for='supplier') Nhà cung cấp
+            input#supplier.form-body__input(type='text' name='supplier')
+          .form-body__wrapper
+            label.form-body__label(for='publisher') Nhà xuất bản
+            input#publisher.form-body__input(type='text' name='publisher')
+          .form-body__wrapper
+            label.form-body__label(for='datePublished') Năm xuất bản
+            input#datePublished.form-body__input(type='number' name='datePublished')
+          .form-body__wrapper
+            label.form-body__label Ngôn ngữ
+            .option
+              .option__selected
+                #language.option__name Tiếng Việt
+                i.option__icon.fas.fa-chevron-down.fa-fw
+              .option__select.hidden
+                .option__name Tiếng Việt
+                .option__name Tiếng Anh
+          .form-body__wrapper
+            label.form-body__label(for='translator') Người dịch
+            input#translator.form-body__input(type='text' name='translator')
+        .form-body__content(data-index=2)
+          .form-body__wrapper
+            label.form-body__label(for='bookLayout') Hình thức
+            input#bookLayout.form-body__input(type='text' name='bookLayout')
+          .form-body__wrapper
+            label.form-body__label(for='dimensions') Kích thước bao bì (cm)
+            input#dimensions.form-body__input(type='text' name='dimensions')
+          .form-body__wrapper
+            label.form-body__label(for='weight') Trọng lượng (gr)
+            input#weight.form-body__input(type='number' name='weight')
+          .form-body__wrapper
+            label.form-body__label(for='pages') Số trang
+            input#pages.form-body__input(type='number' name='pages')
+        .form-body__content(data-index=3)
+          textarea#description.form-body__textarea(placeholder='Mô tả sản phẩm...')
+        .form-body__content(data-index=4)
+          .form-body__wrapper
+            label.form-body__label(for='listPrice') Giá bán hàng
+            input#listPrice.form-body__input(type='number' name='listPrice')
+          .form-body__wrapper
+            label.form-body__label(for='originalPrice') Giá nhập hàng
+            input#originalPrice.form-body__input(type='number' name='originalPrice')
+          .form-body__wrapper
+            .form-body__toggle-switch
+              span Cho phép bán?
+              span#allowSell.toggle-switch
+        .form-body__content(data-index=5)
+          input#images.form-body__input.display-n(type='file' name='images' accept="image/*" multiple)
+          label.form-body__label(for='images')
+            .form-body__upload-image
+              i.far.fa-images
+              p Thêm ảnh
+      .form-footer
+        .btn Đóng
+        button#add.btn.btn--blue Thêm
+
+  .popup-container.popup-container--confirm.overlay.hidden
+    .popup.popup--confirm.hidden-animate
+      i.popup__icon-close.fas.fa-times
+      h5.popup__title Xác nhận
+      p.popup__message
+      .popup__btn-wrapper
+        button.btn Hủy bỏ
+        button#delete.btn.btn--blue Đồng ý
+
+  .popup-container.popup-container--alert.overlay.hidden
+    .popup.popup--alert.hidden-animate
+      i.popup__icon-close.fas.fa-times
+      h5.popup__title Xóa thất bại
+      p.popup__message Bạn chưa chọn mục nào.
+      .popup__btn-wrapper
+        button.btn.btn--blue Xác nhận
+
+  .notification.notification--success.hidden
+    i.notification__icon-close.fas.fa-times
+    i.notification__icon.far.fa-check-circle
+    .notification__content
+      h5.notification__title Thành công
+      p.notification__message
+
+  .notification.notification--error.hidden
+    i.notification__icon-close.fas.fa-times
+    i.notification__icon.far.fa-times-circle
+    .notification__content
+      h5.notification__title Thất bại
+      p.notification__message

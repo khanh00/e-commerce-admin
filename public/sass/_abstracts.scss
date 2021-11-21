@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'Aquire';
+  src: url(../css/fonts/Aquire-BW0ox.otf);
+}
+
+// VARIABLES
+$color-primary: #0099e5;
+$color-primary-light: #e5f6ff;
+$color-secondary: #ff4c4c;
+$color-tertiary: #f1c40f;
+
+// $color-grey-50: #0f1419;
+$color-grey-5: #fafafa;
+$color-grey-10: #f4f4f8;
+$color-grey-20: #e6e6ea;
+$color-grey-25: #b6b7ba;
+$color-grey-30: #606266;
+$color-grey-40: #484848;
+$color-grey-50: #262626;
+
+$color-black: #000;
+$color-white: #fff;
+
+$font-logo: 'Aquire';
+$font-primary: 'Roboto';
+
+$easeOutCirc: cubic-bezier(0, 0.55, 0.45, 1);
+
+// UTILS
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.hidden-animate {
+  transform: translateY(-10rem);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.display-n {
+  display: none !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: rgba($color-black, 0.6);
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bt {
+  border-top: 1px solid $color-grey-20;
+}
+
+.bb {
+  border-bottom: 1px solid $color-grey-20;
+}
+
+.position-r {
+  position: relative;
+}
+
+.color-primary {
+  color: $color-primary;
+}
+
+.color-secondary {
+  color: $color-secondary;
+}

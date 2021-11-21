@@ -1,0 +1,37 @@
+doctype html
+html(lang='vi')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='preconnect' href='https://fonts.googleapis.com')
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+    link(href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300&display=swap' rel='stylesheet')
+    link(rel='icon' type='image/png' sizes='32x32' href='./img/favicon-32x32.png')
+    link(rel='stylesheet' href='./css/all.css')
+    link(rel='stylesheet' href='./css/style.css')
+    title Đăng nhập | Kookee 
+  body
+    main.login-container
+      .login
+        .logo-container
+          .logo
+            a.logo__link(href='/')
+              .logo__icon K
+              span.logo__name Kookee
+        h1.login__header Đăng nhập
+        form#login.login__form
+          label.login__label(for='email') Email
+          input#email.login__input(type='email', required placeholder='khanh@example.com')
+          .position-r
+            label.login__label(for='password') Mật khẩu
+            input#password.login__input(type='password', minlength='8' required placeholder='••••••••')
+            a.login__link(href='') Quên mật khẩu?
+          button.login__btn.btn.btn--blue(type='submit') Đăng nhập
+        p.display-n.login__error
+          i.fas.fa-exclamation-circle
+        p.login__paragraph
+          | Chưa có tài khoản? 
+          a.login__link(href='signup') Tạo tài khoản mới
+          | .
+    script(src='./js/dist/index.js')

@@ -1,0 +1,33 @@
+header.header
+  form.search
+    input.search__input(type='search')
+    button.search__button
+      i.fas.fa-search.search__icon
+  nav.navbar-user
+    ul.nav-user
+      li.nav-user__item
+        i.far.fa-bell.fa-fw.nav-user__icon
+      li.nav-user__item
+        i.far.fa-bookmark.fa-fw.nav-user__icon
+      li.nav-user__item
+        img.nav-user__img(src='./img/avatar-1.png' alt='avatar')
+        ul.sub-nav-user
+          li.sub-nav-user__item.bb
+            img.sub-nav-user__img(src='./img/avatar-1.png' alt='avatar')
+            .sub-nav-user__details
+              .sub-nav-user__name Khánh
+              .sub-nav-user__position Quản trị viên
+          li.sub-nav-user__item
+            i.fas.fa-user.fa-fw.sub-nav-user__icon
+            .sub-nav-user__title Hồ sơ
+          li.sub-nav-user__item
+            i.fas.fa-envelope.fa-fw.sub-nav-user__icon
+            .sub-nav-user__title Hộp thư đến
+            span.sub-nav-user__badge 3
+          li.sub-nav-user__item
+            i.fas.fa-cog.fa-fw.sub-nav-user__icon
+            .sub-nav-user__title Cài đặt
+          .hr
+          li#logout.sub-nav-user__item.bt.sub-nav-user__item--logout
+            i.fas.fa-sign-out-alt.fa-fw.sub-nav-user__icon
+            .sub-nav-user__title Đăng xuất
