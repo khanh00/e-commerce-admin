@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./img/favicon-32x32.png"
+    />
+
+    <link rel="stylesheet" href="./css/all.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Kookee</title>
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="logo-container">
+        <div class="logo">
+          <div class="logo__icon">K</div>
+          <span class="logo__name">Kookee</span>
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <ul class="nav">
+          <li class="nav__item">
+            <a href="#" class="nav__link">
+              <i class="fas fa-home fa-fw nav__icon"></i>
+              <span class="nav__title">Trang chủ</span>
+            </a>
+          </li>
+
+          <li class="nav__item nav__item--active">
+            <a href="#" class="nav__link">
+              <i class="fas fa-store fa-fw nav__icon"></i>
+              <span class="nav__title">Sách</span>
+              <i class="fas fa-chevron-down fa-fw nav__icon"></i>
+            </a>
+          </li>
+
+          <li class="sub-navbar display-n">
+            <ul class="sub-nav">
+              <li class="sub-nav__item sub-nav__item--active">
+                <a href="#" class="sub-nav__link">Sách</a>
+              </li>
+
+              <li class="sub-nav__item">
+                <a href="#" class="sub-nav__link">Loại sách</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav__item">
+            <a href="#" class="nav__link">
+              <i class="fas fa-users fa-fw nav__icon"></i>
+              <span class="nav__title">Khách hàng</span>
+            </a>
+          </li>
+
+          <li class="nav__item">
+            <a href="#" class="nav__link">
+              <i class="fas fa-cog fa-fw nav__icon"></i>
+              <span class="nav__title">Cấu hình</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <footer class="footer">
+        <p class="footer__copyright">
+          &copy; Copyright 2021 by Nguyen Minh Khanh
+        </p>
+      </footer>
+    </div>
+
+    <header class="header">
+      <form class="search">
+        <input type="search" class="search__input" />
+        <button type="submit" class="search__button">
+          <i class="fas fa-search search__icon"></i>
+        </button>
+      </form>
+
+      <nav class="navbar-user">
+        <ul class="nav-user">
+          <li class="nav-user__item">
+            <i class="far fa-bell fa-fw nav-user__icon"></i>
+          </li>
+
+          <li class="nav-user__item">
+            <i class="far fa-bookmark fa-fw nav-user__icon"></i>
+          </li>
+
+          <li class="nav-user__item">
+            <img src="./img/avatar-1.png" alt="avatar" class="nav-user__img" />
+
+            <ul class="sub-nav-user">
+              <li class="sub-nav-user__item bb">
+                <img
+                  src="./img/avatar-1.png"
+                  alt="avatar"
+                  class="sub-nav-user__img"
+                />
+
+                <div class="sub-nav-user__details">
+                  <div class="sub-nav-user__name">Khánh</div>
+                  <div class="sub-nav-user__position">Quản trị viên</div>
+                </div>
+              </li>
+
+              <li class="sub-nav-user__item">
+                <i class="fas fa-user fa-fw sub-nav-user__icon"></i>
+                <div class="sub-nav-user__title">Hồ sơ</div>
+              </li>
+              <li class="sub-nav-user__item">
+                <i class="fas fa-envelope fa-fw sub-nav-user__icon"></i>
+                <div class="sub-nav-user__title">Hộp thư đến</div>
+                <span class="sub-nav-user__badge">3</span>
+              </li>
+
+              <li class="sub-nav-user__item">
+                <i class="fas fa-cog fa-fw sub-nav-user__icon"></i>
+                <div class="sub-nav-user__title">Cài đặt</div>
+              </li>
+
+              <div class="hr"></div>
+
+              <li class="sub-nav-user__item bt">
+                <i class="fas fa-sign-out-alt fa-fw sub-nav-user__icon"></i>
+                <div class="sub-nav-user__title">Đăng xuất</div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- product -->
+    <div class="content">
+      <section class="section">
+        <div class="header-section">
+          <h1 class="header-section__heading">Danh sách</h1>
+          <button class="btn btn--red">
+            <i class="fas fa-trash btn__icon"></i>
+            Xóa sách
+          </button>
+          <button class="btn btn--blue">
+            <i class="fas fa-plus-square btn__icon"></i>
+            Thêm sách
+          </button>
+          <button class="btn">
+            <i class="fas fa-cloud-download-alt btn__icon"></i>
+            Xuất file
+          </button>
+        </div>
+
+        <div class="filter-container">
+          <div class="filter">
+            <i class="fas fa-sliders-h"></i>
+            <span>Bộ lọc</span>
+          </div>
+
+          <div class="pagination">
+            <div class="pagination-info">
+              Hiện từ <span>1</span>-<span>10</span> trên <span>16</span> kết
+              quả
+            </div>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="table">
+            <thead class="table__head">
+              <tr class="table__row">
+                <th class="table__heading">
+                  <div class="checkbox">
+                    <i class="checkbox__icon far fa-square"></i>
+                    <i class="checkbox__icon far fa-check-square display-n"></i>
+                  </div>
+                </th>
+                <th class="table__heading">
+                  <div class="table__cell">
+                    <span class="table__name">Tên sách</span>
+                    <div class="table__icon-box">
+                      <i
+                        class="
+                          fas
+                          fa-sort-up
+                          table__icon-sort table__icon-sort--active
+                        "
+                      ></i>
+                      <i class="fas fa-sort-down table__icon-sort"></i>
+                    </div>
+                  </div>
+                </th>
+                <th class="table__heading">
+                  <div class="table__cell">
+                    <span class="table__name">Thể loại</span>
+                    <div class="table__icon-box">
+                      <i class="fas fa-sort-up table__icon-sort"></i>
+                      <i class="fas fa-sort-down table__icon-sort"></i>
+                    </div>
+                  </div>
+                </th>
+                <th class="table__heading">
+                  <div class="table__cell">
+                    <span class="table__name">Giá bán</span>
+                    <div class="table__icon-box">
+                      <i class="fas fa-sort-up table__icon-sort"></i>
+                      <i class="fas fa-sort-down table__icon-sort"></i>
+                    </div>
+                  </div>
+                </th>
+                <th class="table__heading">
+                  <div class="table__cell">
+                    <span class="table__name">Giá nhập</span>
+                    <div class="table__icon-box">
+                      <i class="fas fa-sort-up table__icon-sort"></i>
+                      <i class="fas fa-sort-down table__icon-sort"></i>
+                    </div>
+                  </div>
+                </th>
+                <th class="table__heading">
+                  <div class="table__cell">
+                    <span class="table__name">Tồn kho</span>
+                    <div class="table__icon-box">
+                      <i class="fas fa-sort-up table__icon-sort"></i>
+                      <i class="fas fa-sort-down table__icon-sort"></i>
+                    </div>
+                  </div>
+                </th>
+                <th class="table__heading">
+                  <div class="table__cell">
+                    <span class="table__name">Trạng thái</span>
+                    <div class="table__icon-box">
+                      <i class="fas fa-sort-up table__icon-sort"></i>
+                      <i class="fas fa-sort-down table__icon-sort"></i>
+                    </div>
+                  </div>
+                </th>
+                <th class="table__heading">
+                  <div class="table__cell">
+                    <span class="table__name">Cập nhật</span>
+                    <div class="table__icon-box">
+                      <i class="fas fa-sort-up table__icon-sort"></i>
+                      <i class="fas fa-sort-down table__icon-sort"></i>
+                    </div>
+                  </div>
+                </th>
+                <th class="table__heading"></th>
+              </tr>
+            </thead>
+
+            <tbody class="table__body">
+              <tr class="table__row">
+                <td class="table__data">
+                  <div class="checkbox">
+                    <i class="checkbox__icon far fa-square"></i>
+                    <i class="checkbox__icon far fa-check-square display-n"></i>
+                  </div>
+                </td>
+                <td class="table__data">
+                  Aleph - Một Chuyến Hành Hương Của Chàng Santiago Trong Đời
+                  Thực
+                </td>
+                <td class="table__data">Tiểu thuyết</td>
+                <td class="table__data">135000 đ</td>
+                <td class="table__data">100000 đ</td>
+                <td class="table__data">200</td>
+                <td class="table__data">Đang bán</td>
+                <td class="table__data">21:00, 31/08/2021</td>
+                <td class="table__data">
+                  <i class="fas fa-ellipsis-v table__icon"></i>
+                  <span class="display-n">Chi tiết</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <div class="paginate">
+            <i class="fas fa-chevron-left"></i>
+            <span class="current-page">1</span>
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </section>
+
+      <div class="form-container overlay hidden">
+        <form class="form hidden-animate">
+          <div class="form-header">
+            <h4 class="form-header__heading form-header__heading--active">
+              <i class="fas fa-store fa-fw"></i>
+              <span>Thông tin cơ bản</span>
+            </h4>
+            <h4 class="form-header__heading">
+              <i class="fas fa-store fa-fw"></i>
+              <span>Thuộc tính</span>
+            </h4>
+            <h4 class="form-header__heading">
+              <i class="fas fa-store fa-fw"></i>
+              <span>Mô tả</span>
+            </h4>
+            <h4 class="form-header__heading">
+              <i class="fas fa-store fa-fw"></i>
+              <span>Giá</span>
+            </h4>
+            <h4 class="form-header__heading">
+              <i class="fas fa-store fa-fw"></i>
+              <span>Hình ảnh</span>
+            </h4>
+          </div>
+          <div class="form-body">
+            <div class="form-body__content form-body__content--active">
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="title"
+                  ><span>* </span>Tiêu đề</label
+                >
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="title"
+                  id="title"
+                />
+                <div class="form-body__error">
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span>Tiêu đề không được để trống</span>
+                </div>
+              </div>
+
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="isbn"
+                  ><span>* </span>Mã isbn</label
+                >
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="isbn"
+                  id="isbn"
+                />
+              </div>
+
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="authors">Tác giả</label>
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="authors"
+                  id="authors"
+                />
+              </div>
+
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="supplier"
+                  >Nhà cung cấp</label
+                >
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="supplier"
+                  id="supplier"
+                />
+              </div>
+
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="publisher"
+                  >Nhà xuất bản</label
+                >
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="publisher"
+                  id="publisher"
+                />
+              </div>
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="datePublished"
+                  >Năm xuất bản</label
+                >
+                <input
+                  class="form-body__input"
+                  type="number"
+                  name="datePublished"
+                  id="datePublished"
+                />
+              </div>
+              <div class="form-body__wrapper">
+                <label class="form-body__label">Ngôn ngữ</label>
+                <div class="option">
+                  <div class="option__selected">
+                    <div id="language" class="option__name">Tiếng Việt</div>
+                    <i class="option__icon fas fa-chevron-down fa-fw"></i>
+                  </div>
+                  <div class="option__select hidden">
+                    <div class="option__name">Tiếng Việt</div>
+                    <div class="option__name">Tiếng Anh</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="translator"
+                  >Người dịch</label
+                >
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="translator"
+                  id="translator"
+                />
+              </div>
+            </div>
+
+            <div class="form-body__content">
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="bookLayout"
+                  >Hình thức</label
+                >
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="bookLayout"
+                  id="bookLayout"
+                />
+              </div>
+
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="dimensions"
+                  >Kích thước bao bì</label
+                >
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="dimensions"
+                  id="dimensions"
+                />
+              </div>
+
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="weight">Trọng lượng</label>
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="weight"
+                  id="weight"
+                />
+              </div>
+
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="pages">Số trang</label>
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="pages"
+                  id="pages"
+                />
+              </div>
+            </div>
+
+            <div class="form-body__content">
+              <textarea
+                class="form-body__textarea"
+                placeholder="Mô tả sản phẩm..."
+              ></textarea>
+            </div>
+
+            <div class="form-body__content">
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="listPrice"
+                  >Giá bán hàng</label
+                >
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="listPrice"
+                  id="listPrice"
+                />
+              </div>
+
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="originalPrice"
+                  >Giá nhập hàng</label
+                >
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="originalPrice"
+                  id="originalPrice"
+                />
+              </div>
+
+              <div class="form-body__wrapper">
+                <div id="allowSell" class="form-body__toggle-switch">
+                  <span>Cho phép bán?</span>
+                  <span class="toggle-switch"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-body__content">
+              <div class="form-body__wrapper">
+                <label class="form-body__label" for="isbn">Cân nặng</label>
+                <input
+                  class="form-body__input"
+                  type="text"
+                  name="isbn"
+                  id="isbn"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-footer">
+            <div class="btn">Đóng</div>
+            <button class="btn btn--blue">Thêm</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="popup-container popup-container--confirm overlay hidden">
+        <div class="popup popup--confirm hidden-animate">
+          <i class="popup__icon-close fas fa-times"></i>
+          <h5 class="popup__title">Xác nhận</h5>
+          <p class="popup__message">
+            Bạn có chắc muốn xóa <span>1</span> mục này ?
+          </p>
+          <div class="popup__btn-wrapper">
+            <button class="btn">Hủy bỏ</button>
+            <button class="btn btn--blue">Đồng ý</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-container popup-container--alert overlay hidden">
+        <div class="popup popup--alert hidden-animate">
+          <i class="popup__icon-close fas fa-times"></i>
+          <h5 class="popup__title">Xóa thất bại</h5>
+          <p class="popup__message">Bạn chưa chọn mục nào.</p>
+          <div class="popup__btn-wrapper">
+            <button class="btn btn--blue">Xác nhận</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="notification notification--success hidden">
+        <i class="notification__icon-close fas fa-times"></i>
+        <i class="notification__icon far fa-check-circle"></i>
+        <div class="notification__content">
+          <h5 class="notification__title">Thành công</h5>
+          <p class="notification__message">
+            Đã xóa <span>1</span> mục thành công
+          </p>
+        </div>
+      </div>
+
+      <div class="notification notification--error hidden">
+        <i class="notification__icon-close fas fa-times"></i>
+        <i class="notification__icon far fa-check-circle"></i>
+        <div class="notification__content">
+          <h5 class="notification__title">Thất bại</h5>
+          <p class="notification__message">Xóa thất bại. Vui lòng thử lại</p>
+        </div>
+      </div>
+
+      <!-- <div class="checkbox">
+        <i class="checkbox__icon far fa-square"></i>
+        <i class="checkbox__icon far fa-check-square display-n"></i>
+      </div> -->
+    </div>
+
+    <script src="js/dist/index.js"></script>
+  </body>
+</html>

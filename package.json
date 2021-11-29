@@ -2,11 +2,11 @@
   "name": "kookee",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js",
-    "watch:sass": "node-sass public/sass/main.scss public/css/style.css -w",
+    "start": "nodemon src/server.js",
+    "start:prod": "NODE_ENV=production nodemon src/server.js",
+    "watch:sass": "node-sass src/assets/sass/main.scss src/assets/css/style.css -w",
     "live-server": "live-server --open=public",
-    "build:js": "parcel watch ./public/js/index.js --dist-dir ./public/js/dist",
+    "build:js": "parcel watch src/assets/js/index.js --dist-dir src/assets/js/dist",
     "build": "npm-run-all -p watch:sass build:js"
   },
   "author": "khanh",

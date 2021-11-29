@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./img/favicon-32x32.png"
+    />
+
+    <link rel="stylesheet" href="./css/all.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <main class="login-container">
+      <div class="login">
+        <div class="logo-container">
+          <div class="logo">
+            <div class="logo__icon">K</div>
+            <span class="logo__name">Kookee</span>
+          </div>
+        </div>
+
+        <h1 class="login__header">Đăng nhập</h1>
+
+        <form class="login__form">
+          <label class="login__label" for="email">Email</label>
+          <input class="login__input" type="text" id="email" required />
+
+          <div class="position-r">
+            <label class="login__label" for="password">Mật khẩu</label>
+            <input
+              class="login__input"
+              type="text"
+              id="password"
+              minlength="8"
+              required
+            />
+            <a class="login__link" href="">Quên mật khẩu?</a>
+          </div>
+
+          <button class="login__btn btn btn--blue" type="submit">
+            Đăng nhập
+          </button>
+        </form>
+
+        <p class="display-n error">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>Đăng nhập thất bại: Sai email hoặc mật khẩu</span>
+        </p>
+
+        <p class="login__paragraph">
+          Chưa có tài khoản?
+          <a class="login__link" href="#">Tạo tài khoản mới</a>.
+        </p>
+      </div>
+    </main>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>
