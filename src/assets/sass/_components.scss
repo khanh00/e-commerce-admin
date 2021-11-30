@@ -48,7 +48,7 @@
   justify-content: center;
 
   min-width: 9rem;
-  height: 4.5rem;
+  height: 4rem;
   padding: 0 1rem;
 
   font-size: 1.6rem;
@@ -96,6 +96,16 @@
     overflow: hidden;
   }
 
+  &__selected {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+      background-color: $color-primary-light;
+    }
+  }
+
   &__select {
     position: absolute;
     top: 0;
@@ -106,15 +116,12 @@
 
     background-color: $color-white;
     box-shadow: 0 2rem 4rem rgba($color-black, 0.1);
-    overflow-y: scroll;
+    overflow-y: auto;
     z-index: 100;
   }
 
   &__icon {
-    position: absolute;
-    top: 1.8rem;
-    right: 1rem;
-
+    margin-right: 1rem;
     font-size: 1.2rem;
     cursor: pointer;
   }
@@ -358,24 +365,5 @@
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-// FILTER
-.filter-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.4rem;
-}
-.filter {
-  margin-right: auto;
-
-  font-weight: 600;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  cursor: pointer;
-
-  i {
-    margin-right: 0.6rem;
   }
 }

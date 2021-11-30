@@ -5,7 +5,7 @@
     "start": "nodemon src/server.js",
     "start:prod": "NODE_ENV=production nodemon src/server.js",
     "watch:sass": "node-sass src/assets/sass/main.scss src/assets/css/style.css -w",
-    "live-server": "live-server --open=public",
+    "live-server": "live-server --open=src/assets",
     "build:js": "parcel watch src/assets/js/index.js --dist-dir src/assets/js/dist",
     "build": "npm-run-all -p watch:sass build:js"
   },

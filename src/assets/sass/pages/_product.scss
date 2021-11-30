@@ -17,17 +17,17 @@
 // TABLE
 .table-wrapper {
   border-radius: 1rem;
+  overflow: auto;
 }
 
 .table {
-  table-layout: fixed;
   border-collapse: collapse;
-
   width: 100%;
+  min-width: 130rem;
+  // height: 10rem;
 
   &__body {
     position: relative;
-    height: 4.5rem;
 
     .table__row:nth-child(even) {
       background-color: $color-grey-5;
@@ -59,10 +59,6 @@
       width: 4rem;
       padding-left: 0;
       text-align: center;
-    }
-
-    &:nth-child(2) {
-      width: 30%;
     }
 
     &:last-child {
@@ -437,4 +433,71 @@
 .form-footer {
   display: flex;
   justify-content: flex-end;
+}
+
+// FILTER
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+  width: 100%;
+}
+.filter {
+  font-weight: 600;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  i {
+    margin-right: 0.6rem;
+  }
+}
+
+.filter-option {
+  display: flex;
+  gap: 2.4rem;
+  margin-bottom: 2.4rem;
+
+  & > * {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 16rem;
+  }
+
+  & > * :first-child {
+    width: 100%;
+  }
+
+  form {
+    align-items: center;
+    flex-direction: row;
+    max-width: 36rem;
+  }
+
+  input {
+    width: 33%;
+    padding: 1rem;
+    margin: 0;
+    height: 3.64rem;
+
+    font-family: inherit;
+    border-radius: 0.4rem;
+    border: 1px solid $color-grey-25;
+    outline: none;
+
+    &:focus {
+      border: 1px solid $color-grey-30;
+    }
+  }
+
+  .option__name {
+    padding: 0.6rem 1rem;
+  }
+
+  .btn {
+    height: 3.64rem; // FIXME: btn is not equal to input, option
+  }
 }

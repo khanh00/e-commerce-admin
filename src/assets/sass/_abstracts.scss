@@ -79,3 +79,11 @@ $easeOutCirc: cubic-bezier(0, 0.55, 0.45, 1);
 .color-secondary {
   color: $color-secondary;
 }
+
+.df {
+  display: flex;
+}
+
+.flex-d-c {
+  flex-direction: column;
+}
