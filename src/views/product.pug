@@ -16,27 +16,58 @@ block content
           i.fas.fa-cloud-download-alt.btn__icon
           |             Xuất file
 
+      .df.flex-d-c
+        .filter-container
+          .filter
+            i.fas.fa-sliders-h
+            span Bộ lọc
+          .pagination
+            .pagination-info
+              | Hiện
+              select#limit
+                option(value="10" selected) 10
+                option(value="20") 20
+                option(value="50") 50
+                option(value="100") 100
+              |  từ 
+              span 
+              | -
+              span 
+              |  trên 
+              span 
+              |  kết quả
 
-      .filter-container
-        .filter
-          i.fas.fa-sliders-h
-          span Bộ lọc
-
-        .pagination
-          .pagination-info
-            | Hiện
-            select#limit
-              option(value="10" selected) 10
-              option(value="20") 20
-              option(value="50") 50
-              option(value="100") 100
-            |  từ 
-            span 
-            | -
-            span 
-            |  trên 
-            span 
-            |  kết quả
+        .filter-option
+          div
+            div.name Thể loại
+            .option
+              .option__selected
+                #category.option__name= categories[0].name
+                i.option__icon.fas.fa-chevron-down.fa-fw
+              .option__select.hidden
+                each category in categories
+                  .option__name= category.name
+          div
+            div.name Trạng thái
+            .option
+              .option__selected
+                .option__name Đang bán
+                i.option__icon.fas.fa-chevron-down.fa-fw
+              .option__select.hidden
+                .option__name Đang bán
+                .option__name Không bán
+          form(action='')
+            div.name Giá bán
+            input(type='number' name='' id='' placeholder='Từ')
+            | —
+            input(type='number' name='' id='' placeholder='Đến')
+            button.btn.btn--blue Áp dụng
+          form(action='')
+            div.name Giá nhập
+            input(type='number' name='' id='' placeholder='Từ')
+            | —
+            input(type='number' name='' id='' placeholder='Đến')
+            button.btn.btn--blue Áp dụng
 
       .table-wrapper
         table.table
@@ -192,34 +223,3 @@ block content
       .form-footer
         .btn Đóng
         button#add.btn.btn--blue Thêm
-
-  .popup-container.popup-container--confirm.overlay.hidden
-    .popup.popup--confirm.hidden-animate
-      i.popup__icon-close.fas.fa-times
-      h5.popup__title Xác nhận
-      p.popup__message
-      .popup__btn-wrapper
-        button.btn Hủy bỏ
-        button#delete.btn.btn--blue Đồng ý
-
-  .popup-container.popup-container--alert.overlay.hidden
-    .popup.popup--alert.hidden-animate
-      i.popup__icon-close.fas.fa-times
-      h5.popup__title Xóa thất bại
-      p.popup__message Bạn chưa chọn mục nào.
-      .popup__btn-wrapper
-        button.btn.btn--blue Xác nhận
-
-  .notification.notification--success.hidden
-    i.notification__icon-close.fas.fa-times
-    i.notification__icon.far.fa-check-circle
-    .notification__content
-      h5.notification__title Thành công
-      p.notification__message
-
-  .notification.notification--error.hidden
-    i.notification__icon-close.fas.fa-times
-    i.notification__icon.far.fa-times-circle
-    .notification__content
-      h5.notification__title Thất bại
-      p.notification__message

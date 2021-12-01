@@ -1,26 +1,36 @@
+.root {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.main {
+  width: 100%;
+  padding-inline: 2.5rem;
+}
+
 // SIDEBAR
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
+  flex-shrink: 0;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-
+  align-items: flex-start;
   width: 25rem;
-  height: 100vh;
+  // max-width: 25rem;
+
+  background-color: $color-white;
 }
 
 .logo-container {
   margin: 2rem 0 4rem;
+  width: 100%;
 }
 
 // NAVIGATION
 .navbar {
   width: 100%;
 }
-
 .nav {
   &__item {
     padding: 1rem 2.5rem;
@@ -83,7 +93,7 @@
 }
 
 .sub-navbar {
-  list-style: none;
+  // width: 100%;
 }
 
 .sub-nav {
@@ -91,6 +101,7 @@
     display: block;
     padding: 1rem 2.5rem;
 
+    list-style: none;
     border-top-right-radius: 10rem;
     border-bottom-right-radius: 10rem;
     color: $color-grey-30;
@@ -137,25 +148,26 @@
 
   color: $color-grey-30;
   font-size: 1.2rem;
+  align-self: center;
 }
 
 // HEADER
 .header {
-  position: fixed;
-  top: 0;
-  right: 2.5rem;
+  // position: fixed;
+  // top: 0;
+  // right: 2.5rem;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  width: calc(100% - 30rem);
+  width: 100%;
+  margin-bottom: 2.5rem;
 
   background-color: $color-white;
   box-shadow: 0 0 0.2rem rgba($color-black, 0.2);
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
-  z-index: 100;
 
   & > *:first-child {
     margin-left: 2.5rem;
@@ -330,5 +342,4 @@
 
 // CONTENT
 .content {
-  margin: 8.6rem 0 0 25rem;
 }

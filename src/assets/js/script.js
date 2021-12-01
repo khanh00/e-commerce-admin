@@ -158,15 +158,3 @@ notifications.forEach((notification) => {
     toggleSortIcon
   );
 });
-
-// CHECKBOX
-// ERROR: when delete 10 products
-
-document.addEventListener('scroll', () => {
-  if (document.documentElement.scrollTop > 0) {
-    $('.header').style.boxShadow =
-      '0 0 0.2rem rgba(0,0,0, 0.2),0 1rem 2rem -1rem rgba(0,0,0, 0.2)';
-  } else {
-    $('.header').style.boxShadow = '0 0 0.2rem rgba(0,0,0, 0.2)';
-  }
-});

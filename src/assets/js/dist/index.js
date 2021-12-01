@@ -575,12 +575,6 @@ notifications.forEach((notification)=>{
 ].forEach((column)=>{
     $(`.table__heading:nth-child(${column})`)?.addEventListener('click', toggleSortIcon);
 });
-// CHECKBOX
-// ERROR: when delete 10 products
-document.addEventListener('scroll', ()=>{
-    if (document.documentElement.scrollTop > 0) $('.header').style.boxShadow = '0 0 0.2rem rgba(0,0,0, 0.2),0 1rem 2rem -1rem rgba(0,0,0, 0.2)';
-    else $('.header').style.boxShadow = '0 0 0.2rem rgba(0,0,0, 0.2)';
-});
 
 },{}],"2jcTq":[function(require,module,exports) {
 var _category = require("../category/category");
@@ -795,7 +789,7 @@ $('.paginate')?.addEventListener('click', async (e)=>{
         _utils.updatePaginationInfo(allProducts.length, page, limit);
     }
 });
-$('#limit').addEventListener('change', (e)=>{
+$('#limit')?.addEventListener('change', (e)=>{
     limit = +$('#limit').value;
     _utils.renderSpinner($('.table__body'));
     page = 1;
@@ -2694,10 +2688,10 @@ const renderSpinner = (element)=>{
       <i class="fas fa-circle-notch"></i>
     </div>
     `;
-    element.insertAdjacentHTML('afterbegin', html);
+    element?.insertAdjacentHTML('afterbegin', html);
 };
 const removeSpinner = (element)=>{
-    element.querySelector('.spinner')?.remove();
+    element?.querySelector('.spinner').remove();
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"im95S":[function(require,module,exports) {

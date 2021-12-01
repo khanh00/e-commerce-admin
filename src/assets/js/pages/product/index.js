@@ -257,7 +257,7 @@ $('.paginate')?.addEventListener('click', async (e) => {
   }
 });
 
-$('#limit').addEventListener('change', (e) => {
+$('#limit')?.addEventListener('change', (e) => {
   limit = +$('#limit').value;
   utils.renderSpinner($('.table__body'));
   page = 1;

@@ -164,14 +164,15 @@ input[type='search']::-webkit-search-cancel-button {
     max-height: 20rem;
     background-color: #fff;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
+    overflow: auto;
     z-index: 100; }
   .option__icon {
     margin-right: 1rem;
     font-size: 1.2rem;
     cursor: pointer; }
   .option__name {
-    padding: 0.9rem 1rem; }
+    padding: 0.9rem 1rem;
+    white-space: nowrap; }
     .option__name + .option__name {
       border-top: 1px solid #b6b7ba; }
     .option__name:hover {
@@ -330,18 +331,26 @@ input[type='search']::-webkit-search-cancel-button {
   100% {
     transform: rotate(360deg); } }
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
+.root {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 25rem;
+  width: 100%;
   height: 100vh; }
 
+.main {
+  width: 100%;
+  padding-inline: 2.5rem; }
+
+.sidebar {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 25rem;
+  background-color: #fff; }
+
 .logo-container {
-  margin: 2rem 0 4rem; }
+  margin: 2rem 0 4rem;
+  width: 100%; }
 
 .navbar {
   width: 100%; }
@@ -387,12 +396,10 @@ input[type='search']::-webkit-search-cancel-button {
 .nav__item--active .nav__title {
   font-weight: 700; }
 
-.sub-navbar {
-  list-style: none; }
-
 .sub-nav__link {
   display: block;
   padding: 1rem 2.5rem;
+  list-style: none;
   border-top-right-radius: 10rem;
   border-bottom-right-radius: 10rem;
   color: #606266;
@@ -425,21 +432,19 @@ input[type='search']::-webkit-search-cancel-button {
   margin-top: auto;
   padding: 0.4rem;
   color: #606266;
-  font-size: 1.2rem; }
+  font-size: 1.2rem;
+  align-self: center; }
 
 .header {
-  position: fixed;
-  top: 0;
-  right: 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 30rem);
+  width: 100%;
+  margin-bottom: 2.5rem;
   background-color: #fff;
   box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.2);
   border-bottom-left-radius: 2rem;
-  border-bottom-right-radius: 2rem;
-  z-index: 100; }
+  border-bottom-right-radius: 2rem; }
   .header > *:first-child {
     margin-left: 2.5rem; }
   .header > *:last-child {
@@ -554,9 +559,6 @@ input[type='search']::-webkit-search-cancel-button {
     color: #fff;
     font-size: 1.4rem; }
 
-.content {
-  margin: 8.6rem 0 0 25rem; }
-
 .error-container {
   display: flex;
   justify-content: center;
@@ -642,8 +644,7 @@ input[type='search']::-webkit-search-cancel-button {
     margin-top: 0.6rem; }
 
 .section {
-  border-radius: 1rem;
-  padding: 0 2.5rem; }
+  border-radius: 1rem; }
 
 .header-section {
   display: flex;
@@ -655,18 +656,24 @@ input[type='search']::-webkit-search-cancel-button {
 
 .table-wrapper {
   border-radius: 1rem;
-  overflow: auto; }
+  overflow: auto;
+  width: 100%;
+  height: 30rem; }
 
 .table {
   border-collapse: collapse;
   width: 100%;
   min-width: 130rem; }
+  .table__head {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 -1px 0 1px #fff; }
   .table__body {
     position: relative; }
     .table__body .table__row:nth-child(even) {
       background-color: #fafafa; }
     .table__body .table__row {
-      position: relative;
       cursor: default; }
     .table__body .table__row:hover {
       background-color: #f4f4f8;
@@ -674,6 +681,7 @@ input[type='search']::-webkit-search-cancel-button {
       z-index: 10; }
   .table__heading, .table__data {
     position: relative;
+    width: 13rem;
     height: 4.5rem;
     padding-left: 1rem;
     border: 1px solid #fff;
@@ -682,6 +690,10 @@ input[type='search']::-webkit-search-cancel-button {
       width: 4rem;
       padding-left: 0;
       text-align: center; }
+    .table__heading:nth-child(2), .table__data:nth-child(2) {
+      width: auto; }
+    .table__heading:nth-last-child(2), .table__data:nth-last-child(2) {
+      width: 20rem; }
     .table__heading:last-child, .table__data:last-child {
       width: 4rem;
       padding-left: 0;
@@ -702,7 +714,6 @@ input[type='search']::-webkit-search-cancel-button {
     .table__action:hover {
       background-color: #f4f4f8; }
   .table__heading {
-    border-radius: 0.4rem;
     background-color: #fafafa;
     text-transform: uppercase;
     margin-right: 1rem;
@@ -940,27 +951,32 @@ input[type='search']::-webkit-search-cancel-button {
 
 .filter-option {
   display: flex;
+  flex-wrap: wrap;
   gap: 2.4rem;
-  margin-bottom: 2.4rem; }
+  margin-bottom: 2.5rem; }
+  .filter-option .name {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.2rem; }
   .filter-option > * {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: 0.6rem;
     width: 100%;
-    max-width: 16rem; }
+    max-width: 20rem; }
   .filter-option > * :first-child {
     width: 100%; }
   .filter-option form {
     align-items: center;
     flex-direction: row;
-    max-width: 36rem; }
+    max-width: 35rem; }
   .filter-option input {
     width: 33%;
     padding: 1rem;
-    margin: 0;
     height: 3.64rem;
     font-family: inherit;
+    font-size: inherit;
     border-radius: 0.4rem;
     border: 1px solid #b6b7ba;
     outline: none; }

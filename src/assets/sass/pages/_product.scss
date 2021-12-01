@@ -1,6 +1,5 @@
 .section {
   border-radius: 1rem;
-  padding: 0 2.5rem;
 }
 
 .header-section {
@@ -18,13 +17,21 @@
 .table-wrapper {
   border-radius: 1rem;
   overflow: auto;
+  width: 100%;
+  height: 30rem;
 }
 
 .table {
   border-collapse: collapse;
   width: 100%;
   min-width: 130rem;
-  // height: 10rem;
+
+  &__head {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 -1px 0 1px #fff;
+  }
 
   &__body {
     position: relative;
@@ -34,7 +41,6 @@
     }
 
     .table__row {
-      position: relative;
       cursor: default;
     }
 
@@ -49,6 +55,7 @@
   &__data {
     position: relative;
 
+    width: 13rem;
     height: 4.5rem;
     padding-left: 1rem;
 
@@ -59,6 +66,14 @@
       width: 4rem;
       padding-left: 0;
       text-align: center;
+    }
+
+    &:nth-child(2) {
+      width: auto;
+    }
+
+    &:nth-last-child(2) {
+      width: 20rem;
     }
 
     &:last-child {
@@ -90,7 +105,6 @@
   }
 
   &__heading {
-    border-radius: 0.4rem;
     background-color: $color-grey-5;
     text-transform: uppercase;
     margin-right: 1rem;
@@ -455,8 +469,15 @@
 
 .filter-option {
   display: flex;
+  flex-wrap: wrap;
   gap: 2.4rem;
-  margin-bottom: 2.4rem;
+  margin-bottom: 2.5rem;
+
+  .name {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+  }
 
   & > * {
     display: flex;
@@ -464,7 +485,7 @@
     flex-wrap: wrap;
     gap: 0.6rem;
     width: 100%;
-    max-width: 16rem;
+    max-width: 20rem;
   }
 
   & > * :first-child {
@@ -474,16 +495,16 @@
   form {
     align-items: center;
     flex-direction: row;
-    max-width: 36rem;
+    max-width: 35rem;
   }
 
   input {
     width: 33%;
     padding: 1rem;
-    margin: 0;
     height: 3.64rem;
 
     font-family: inherit;
+    font-size: inherit;
     border-radius: 0.4rem;
     border: 1px solid $color-grey-25;
     outline: none;
@@ -498,6 +519,6 @@
   }
 
   .btn {
-    height: 3.64rem; // FIXME: btn is not equal to input, option
+    height: 3.64rem;
   }
 }

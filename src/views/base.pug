@@ -13,9 +13,42 @@ html(lang='en')
     title #{title} | Kookee
     
   body
-    include _sidebar
-    include _header
+    .root
+      include _sidebar
 
-    block content
+      .main
+        include _header
+        block content
+
+    .popup-container.popup-container--confirm.overlay.hidden
+      .popup.popup--confirm.hidden-animate
+        i.popup__icon-close.fas.fa-times
+        h5.popup__title Xác nhận
+        p.popup__message
+        .popup__btn-wrapper
+          button.btn Hủy bỏ
+          button#delete.btn.btn--blue Đồng ý
+
+    .popup-container.popup-container--alert.overlay.hidden
+      .popup.popup--alert.hidden-animate
+        i.popup__icon-close.fas.fa-times
+        h5.popup__title Xóa thất bại
+        p.popup__message Bạn chưa chọn mục nào.
+        .popup__btn-wrapper
+          button.btn.btn--blue Xác nhận
+
+    .notification.notification--success.hidden
+      i.notification__icon-close.fas.fa-times
+      i.notification__icon.far.fa-check-circle
+      .notification__content
+        h5.notification__title Thành công
+        p.notification__message
+
+    .notification.notification--error.hidden
+      i.notification__icon-close.fas.fa-times
+      i.notification__icon.far.fa-times-circle
+      .notification__content
+        h5.notification__title Thất bại
+        p.notification__message
 
     script(src='./js/dist/index.js')

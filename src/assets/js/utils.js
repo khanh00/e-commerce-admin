@@ -50,11 +50,11 @@ const renderSpinner = (element) => {
       <i class="fas fa-circle-notch"></i>
     </div>
     `;
-  element.insertAdjacentHTML('afterbegin', html);
+  element?.insertAdjacentHTML('afterbegin', html);
 };
 
 const removeSpinner = (element) => {
-  element.querySelector('.spinner')?.remove();
+  element?.querySelector('.spinner').remove();
 };
 
 export {
