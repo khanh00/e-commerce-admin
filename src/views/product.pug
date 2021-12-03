@@ -37,36 +37,41 @@ block content
               span 
               |  kết quả
 
-        .filter-option
-          div
+        .filter-option-list
+          div.filter-option(data-category-filter='category')
             div.name Thể loại
             .option
               .option__selected
-                #category.option__name= categories[0].name
+                .option__name Thể loại
                 i.option__icon.fas.fa-chevron-down.fa-fw
               .option__select.hidden
+                .option__name Thể loại
                 each category in categories
                   .option__name= category.name
-          div
+
+          div.filter-option(data-allow-sell-filter='allowSell')
             div.name Trạng thái
             .option
               .option__selected
-                .option__name Đang bán
+                .option__name Trạng thái
                 i.option__icon.fas.fa-chevron-down.fa-fw
               .option__select.hidden
+                .option__name Trạng thái
                 .option__name Đang bán
                 .option__name Không bán
-          form(action='')
+
+          form.filter-option(data-list-price-filter='listPrice')
             div.name Giá bán
-            input(type='number' name='' id='' placeholder='Từ')
+            input(type='number' id='fromListPrice' placeholder='Từ')
             | —
-            input(type='number' name='' id='' placeholder='Đến')
+            input(type='number' id='toListPrice' placeholder='Đến')
             button.btn.btn--blue Áp dụng
-          form(action='')
+
+          form.filter-option(data-original-price-filter='originalPrice')
             div.name Giá nhập
-            input(type='number' name='' id='' placeholder='Từ')
+            input(type='number' id='fromOriginalPrice' placeholder='Từ')
             | —
-            input(type='number' name='' id='' placeholder='Đến')
+            input(type='number' id='toOriginalPrice' placeholder='Đến')
             button.btn.btn--blue Áp dụng
 
       .table-wrapper

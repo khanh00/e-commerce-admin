@@ -18,7 +18,7 @@
   border-radius: 1rem;
   overflow: auto;
   width: 100%;
-  height: 30rem;
+  max-height: 62rem;
 }
 
 .table {
@@ -467,7 +467,7 @@
   }
 }
 
-.filter-option {
+.filter-option-list {
   display: flex;
   flex-wrap: wrap;
   gap: 2.4rem;
@@ -479,20 +479,23 @@
     font-size: 1.2rem;
   }
 
-  & > * {
+  .filter-option {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    gap: 0.6rem;
     width: 100%;
+    gap: 0.6rem;
+
+    :first-child {
+      width: 100%;
+    }
+  }
+
+  div.filter-option {
+    flex-direction: column;
     max-width: 20rem;
   }
 
-  & > * :first-child {
-    width: 100%;
-  }
-
-  form {
+  form.filter-option {
     align-items: center;
     flex-direction: row;
     max-width: 35rem;

@@ -11,7 +11,9 @@ const hiddenAllOption = () => {
 };
 
 const toggleOption = (option, e) => {
-  const optionSelectedName = option.querySelector('[id]');
+  const optionSelectedName = option.querySelector(
+    '.option__selected .option__name  '
+  );
   const optionSelected = option.querySelector('.option__selected');
   const optionSelect = option.querySelector('.option__select');
 
