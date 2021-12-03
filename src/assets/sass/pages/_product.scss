@@ -36,6 +36,12 @@
   &__body {
     position: relative;
 
+    td[colspan='10'] {
+      text-align: center;
+      font-size: 1.8rem;
+      padding-block: 1.4rem;
+    }
+
     .table__row:nth-child(even) {
       background-color: $color-grey-5;
     }
@@ -70,6 +76,10 @@
 
     &:nth-child(2) {
       width: auto;
+    }
+
+    &:nth-child(3) {
+      width: 16rem;
     }
 
     &:nth-last-child(2) {

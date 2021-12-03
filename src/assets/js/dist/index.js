@@ -590,6 +590,7 @@ let sort = '';
 let search = '';
 let allProducts;
 let filter = '';
+let queryString = '';
 (async ()=>{
     allProducts = await _product.getAllProduct();
     _utils.renderSpinner($('.table__body'));
@@ -734,8 +735,12 @@ $('.search')?.addEventListener('submit', async (e)=>{
     e.preventDefault();
     _utils.renderSpinner($('.table__body'));
     search = $('.search__input').value.trim();
-    if (search) allProducts = await _product.getAllProduct(`?text[search]=${search}&score[meta]=textScore`);
-    else allProducts = await _product.getAllProduct();
+    if (search) {
+        queryString = `?text[search]=${search}&score[meta]=textScore&`;
+        allProducts = await _product.getAllProduct(queryString);
+    } else allProducts = await _product.getAllProduct();
+    filter = '';
+    _productView.resetFilter();
     page = 1;
     _utils.updatePaginationInfo(allProducts.length, page, limit);
     _productView.renderRows(getProducts());
@@ -764,9 +769,12 @@ const SORT = [
             if (iconActive.classList.contains('fa-sort-up')) sort = SORT[index];
             if (iconActive.classList.contains('fa-sort-down')) sort = `-${SORT[index]}`;
         } else sort = '-updateAt';
+        if (queryString) {
+            if (queryString.search('sort') !== -1) queryString = queryString.replace(/(?<=sort=)(.*?)(?=&)/, sort);
+            else queryString += `sort=${sort}&`;
+        } else queryString = `?sort=${sort}&`;
         _utils.renderSpinner($('.table__body'));
-        if (search) allProducts = await _product.getAllProduct(`?text[search]=${search}&sort=${sort}`);
-        else allProducts = await _product.getAllProduct(`?sort=${sort}`);
+        allProducts = await _product.getAllProduct(queryString);
         _productView.renderRows(getProducts());
     });
 });
@@ -803,7 +811,7 @@ $('.filter-option-list').addEventListener('click', async (e)=>{
         const el = e.target.closest('.filter-option');
         if (el.dataset.categoryFilter) {
             const cat = e.target.textContent;
-            if (cat === 'Thể loại') filter = filter.replace(/(category=.*)(?=&)/, '');
+            if (cat === 'Thể loại') filter = filter.replace(/category=.*?&/, '');
             else {
                 const catId = (await _category.getAllCategory(`?name=${cat}`))[0]._id;
                 if (filter.search('category') !== -1) filter = filter.replace(/(?<=category=)(.*?)(?=&)/, catId);
@@ -812,17 +820,20 @@ $('.filter-option-list').addEventListener('click', async (e)=>{
         }
         if (el.dataset.allowSellFilter) {
             const allowSell = e.target.textContent;
-            if (allowSell === 'Trạng thái') filter = filter.replace(/(allowSell=.*)(?=&)/, '');
+            if (allowSell === 'Trạng thái') filter = filter.replace(/allowSell=.*?&/, '');
             else {
                 const isAllowSell = e.target.textContent.startsWith('Đ');
-                if (filter.search('category') !== -1) filter = filter.replace(/(?<=allowSell=)(.*?)(?=&)/, isAllowSell);
+                if (filter.search('allowSell') !== -1) filter = filter.replace(/(?<=allowSell=)(.*?)(?=&)/, isAllowSell);
                 else filter += `allowSell=${isAllowSell}&`;
             }
         }
         if (el.dataset.listPriceFilter) {
             const from = $('#fromListPrice').value;
             const to = $('#toListPrice').value;
-            if (filter.search('listPrice') !== -1) {
+            if (!from || !to) {
+                filter = filter.replace(/listPrice\[gte\]=.*?&/, '');
+                filter = filter.replace(/listPrice\[lte\]=.*?&/, '');
+            } else if (filter.search('listPrice') !== -1) {
                 filter = filter.replace(/(?<=listPrice\[gte\]=)(.*?)(?=&)/, from);
                 filter = filter.replace(/(?<=listPrice\[lte\]=)(.*?)(?=&)/, to);
             } else filter += `listPrice[gte]=${from}&listPrice[lte]=${to}&`;
@@ -830,7 +841,10 @@ $('.filter-option-list').addEventListener('click', async (e)=>{
         if (el.dataset.originalPriceFilter) {
             const from = $('#fromOriginalPrice').value;
             const to = $('#toOriginalPrice').value;
-            if (filter.search('originalPrice') !== -1) {
+            if (!from || !to) {
+                filter = filter.replace(/originalPrice\[gte\]=.*?&/, '');
+                filter = filter.replace(/originalPrice\[lte\]=.*?&/, '');
+            } else if (filter.search('originalPrice') !== -1) {
                 filter = filter.replace(/(?<=originalPrice\[gte\]=)(.*?)(?=&)/, from);
                 filter = filter.replace(/(?<=originalPrice\[lte\]=)(.*?)(?=&)/, to);
             } else filter += `originalPrice[gte]=${from}&originalPrice[lte]=${to}&`;
@@ -838,7 +852,9 @@ $('.filter-option-list').addEventListener('click', async (e)=>{
         page = 1;
         sort = '';
         _utils.renderSpinner($('.table__body'));
-        allProducts = await _product.getAllProduct(`?${filter}`);
+        if (queryString) queryString += `${filter}`;
+        else queryString = `?${filter}`;
+        allProducts = await _product.getAllProduct(queryString);
         _utils.updatePaginationInfo(allProducts.length, page, limit);
     }
     _productView.renderRows(getProducts());
@@ -2477,6 +2493,8 @@ parcelHelpers.export(exports, "activeContent", ()=>activeContent
 );
 parcelHelpers.export(exports, "resetForm", ()=>resetForm
 );
+parcelHelpers.export(exports, "resetFilter", ()=>resetFilter
+);
 var _category = require("../category/category");
 var _utils = require("../../utils");
 const $ = document.querySelector.bind(document);
@@ -2630,6 +2648,10 @@ const renderRow = (prod)=>{
 };
 const renderRows = async (products)=>{
     try {
+        if (products.length === 0) {
+            $('.table__body').innerHTML = '<tr><td colspan="10">Không có sản phẩm nào</td></tr>';
+            return;
+        }
         const cats = await _category.getAllCategory();
         products.forEach((prod)=>{
             cats.forEach((cat)=>{
@@ -2674,6 +2696,16 @@ const renderDetails = (prod)=>{
     </div>
     `;
         $('#images').insertAdjacentHTML('beforebegin', imgFormHTML);
+    });
+};
+const resetFilter = ()=>{
+    const filterOptions = $$('.filter-option');
+    filterOptions.forEach((filterOption)=>{
+        if (filterOption.dataset.categoryFilter) // eslint-disable-next-line no-param-reassign
+        filterOption.querySelector('.option__selected .option__name').textContent = 'Thể loại';
+        if (filterOption.dataset.allowSellFilter) // eslint-disable-next-line no-param-reassign
+        filterOption.querySelector('.option__selected .option__name').textContent = 'Trạng thái';
+        if (filterOption.dataset.listPriceFilter || filterOption.dataset.originalPriceFilter) filterOption.reset();
     });
 };
 

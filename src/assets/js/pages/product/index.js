@@ -13,6 +13,7 @@ let sort = '';
 let search = '';
 let allProducts;
 let filter = '';
+let queryString = '';
 
 (async () => {
   allProducts = await product.getAllProduct();
@@ -187,12 +188,14 @@ $('.search')?.addEventListener('submit', async (e) => {
   utils.renderSpinner($('.table__body'));
   search = $('.search__input').value.trim();
   if (search) {
-    allProducts = await product.getAllProduct(
-      `?text[search]=${search}&score[meta]=textScore`
-    );
+    queryString = `?text[search]=${search}&score[meta]=textScore&`;
+    allProducts = await product.getAllProduct(queryString);
   } else {
     allProducts = await product.getAllProduct();
   }
+
+  filter = '';
+  productView.resetFilter();
   page = 1;
   utils.updatePaginationInfo(allProducts.length, page, limit);
   productView.renderRows(getProducts());
@@ -223,12 +226,14 @@ const SORT = [
         sort = '-updateAt';
       }
 
+      if (queryString) {
+        if (queryString.search('sort') !== -1) {
+          queryString = queryString.replace(/(?<=sort=)(.*?)(?=&)/, sort);
+        } else queryString += `sort=${sort}&`;
+      } else queryString = `?sort=${sort}&`;
+
       utils.renderSpinner($('.table__body'));
-      if (search) {
-        allProducts = await product.getAllProduct(
-          `?text[search]=${search}&sort=${sort}`
-        );
-      } else allProducts = await product.getAllProduct(`?sort=${sort}`);
+      allProducts = await product.getAllProduct(queryString);
       productView.renderRows(getProducts());
     }
   );
@@ -278,7 +283,7 @@ $('.filter-option-list').addEventListener('click', async (e) => {
     if (el.dataset.categoryFilter) {
       const cat = e.target.textContent;
       if (cat === 'Thể loại') {
-        filter = filter.replace(/(category=.*)(?=&)/, '');
+        filter = filter.replace(/category=.*?&/, '');
       } else {
         const catId = (await category.getAllCategory(`?name=${cat}`))[0]._id;
         if (filter.search('category') !== -1) {
@@ -290,10 +295,10 @@ $('.filter-option-list').addEventListener('click', async (e) => {
     if (el.dataset.allowSellFilter) {
       const allowSell = e.target.textContent;
       if (allowSell === 'Trạng thái') {
-        filter = filter.replace(/(allowSell=.*)(?=&)/, '');
+        filter = filter.replace(/allowSell=.*?&/, '');
       } else {
         const isAllowSell = e.target.textContent.startsWith('Đ');
-        if (filter.search('category') !== -1) {
+        if (filter.search('allowSell') !== -1) {
           filter = filter.replace(/(?<=allowSell=)(.*?)(?=&)/, isAllowSell);
         } else filter += `allowSell=${isAllowSell}&`;
       }
@@ -302,7 +307,10 @@ $('.filter-option-list').addEventListener('click', async (e) => {
     if (el.dataset.listPriceFilter) {
       const from = $('#fromListPrice').value;
       const to = $('#toListPrice').value;
-      if (filter.search('listPrice') !== -1) {
+      if (!from || !to) {
+        filter = filter.replace(/listPrice\[gte\]=.*?&/, '');
+        filter = filter.replace(/listPrice\[lte\]=.*?&/, '');
+      } else if (filter.search('listPrice') !== -1) {
         filter = filter.replace(/(?<=listPrice\[gte\]=)(.*?)(?=&)/, from);
         filter = filter.replace(/(?<=listPrice\[lte\]=)(.*?)(?=&)/, to);
       } else filter += `listPrice[gte]=${from}&listPrice[lte]=${to}&`;
@@ -311,7 +319,10 @@ $('.filter-option-list').addEventListener('click', async (e) => {
     if (el.dataset.originalPriceFilter) {
       const from = $('#fromOriginalPrice').value;
       const to = $('#toOriginalPrice').value;
-      if (filter.search('originalPrice') !== -1) {
+      if (!from || !to) {
+        filter = filter.replace(/originalPrice\[gte\]=.*?&/, '');
+        filter = filter.replace(/originalPrice\[lte\]=.*?&/, '');
+      } else if (filter.search('originalPrice') !== -1) {
         filter = filter.replace(/(?<=originalPrice\[gte\]=)(.*?)(?=&)/, from);
         filter = filter.replace(/(?<=originalPrice\[lte\]=)(.*?)(?=&)/, to);
       } else filter += `originalPrice[gte]=${from}&originalPrice[lte]=${to}&`;
@@ -320,7 +331,9 @@ $('.filter-option-list').addEventListener('click', async (e) => {
     page = 1;
     sort = '';
     utils.renderSpinner($('.table__body'));
-    allProducts = await product.getAllProduct(`?${filter}`);
+    if (queryString) queryString += `${filter}`;
+    else queryString = `?${filter}`;
+    allProducts = await product.getAllProduct(queryString);
     utils.updatePaginationInfo(allProducts.length, page, limit);
   }
   productView.renderRows(getProducts());

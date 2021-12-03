@@ -185,6 +185,11 @@ const renderRow = (prod) => {
 
 const renderRows = async (products) => {
   try {
+    if (products.length === 0) {
+      $('.table__body').innerHTML =
+        '<tr><td colspan="10">Không có sản phẩm nào</td></tr>';
+      return;
+    }
     const cats = await category.getAllCategory();
 
     products.forEach((prod) => {
@@ -238,6 +243,30 @@ const renderDetails = (prod) => {
   });
 };
 
+const resetFilter = () => {
+  const filterOptions = $$('.filter-option');
+  filterOptions.forEach((filterOption) => {
+    if (filterOption.dataset.categoryFilter) {
+      // eslint-disable-next-line no-param-reassign
+      filterOption.querySelector(
+        '.option__selected .option__name'
+      ).textContent = 'Thể loại';
+    }
+    if (filterOption.dataset.allowSellFilter) {
+      // eslint-disable-next-line no-param-reassign
+      filterOption.querySelector(
+        '.option__selected .option__name'
+      ).textContent = 'Trạng thái';
+    }
+    if (
+      filterOption.dataset.listPriceFilter ||
+      filterOption.dataset.originalPriceFilter
+    ) {
+      filterOption.reset();
+    }
+  });
+};
+
 export {
   renderRow,
   renderRows,
@@ -248,4 +277,5 @@ export {
   activeHeading,
   activeContent,
   resetForm,
+  resetFilter,
 };

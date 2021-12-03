@@ -671,6 +671,10 @@ input[type='search']::-webkit-search-cancel-button {
     box-shadow: 0 -1px 0 1px #fff; }
   .table__body {
     position: relative; }
+    .table__body td[colspan='10'] {
+      text-align: center;
+      font-size: 1.8rem;
+      padding-block: 1.4rem; }
     .table__body .table__row:nth-child(even) {
       background-color: #fafafa; }
     .table__body .table__row {
@@ -692,6 +696,8 @@ input[type='search']::-webkit-search-cancel-button {
       text-align: center; }
     .table__heading:nth-child(2), .table__data:nth-child(2) {
       width: auto; }
+    .table__heading:nth-child(3), .table__data:nth-child(3) {
+      width: 16rem; }
     .table__heading:nth-last-child(2), .table__data:nth-last-child(2) {
       width: 20rem; }
     .table__heading:last-child, .table__data:last-child {
