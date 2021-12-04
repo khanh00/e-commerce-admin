@@ -61,7 +61,7 @@ const getProduct = catchAsync(async (req, res, next) => {
 });
 
 const createProduct = catchAsync(async (req, res, next) => {
-  req.body.images = ['default.jpg'];
+  req.body.images = ['default.png'];
   if (req.files?.length > 0) {
     req.body.images = [...req.files.map((file) => file.filename)];
   }
@@ -100,7 +100,7 @@ const deleteProduct = catchAsync(async (req, res, next) => {
     next(new AppError(message, StatusCodes.BAD_REQUEST));
   } else {
     product.images.forEach(async (image) => {
-      if (image !== 'default.jpg')
+      if (image !== 'default.png')
         await promisify(fs.unlink)(`public/img/products/${image}`);
     });
     res.status(StatusCodes.NO_CONTENT).json({
