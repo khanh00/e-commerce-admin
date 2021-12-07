@@ -23,7 +23,7 @@ const getCategory = catchAsync(async (req, res, next) => {
   const category = await Category.findById(req.params.id);
 
   if (!category) {
-    const message = 'No category found with that ID';
+    const message = 'Không tìm thấy thể loại với Id đã cho';
     const statusCode = StatusCodes.BAD_REQUEST;
     next(new AppError(message, statusCode));
   } else {
@@ -52,7 +52,7 @@ const updateCategory = catchAsync(async (req, res, next) => {
   });
 
   if (!category) {
-    const message = 'No category found with that ID';
+    const message = 'Không tìm thấy thể loại với Id đã cho';
     const statusCode = StatusCodes.BAD_REQUEST;
     next(new AppError(message, statusCode));
   } else {
@@ -67,7 +67,7 @@ const deleteCategory = catchAsync(async (req, res, next) => {
   const category = await Category.findByIdAndDelete(req.params.id);
 
   if (!category) {
-    const message = 'No category found with that ID';
+    const message = 'Không tìm thấy thể loại với Id đã cho';
     const statusCode = StatusCodes.BAD_REQUEST;
     next(new AppError(message, statusCode));
   } else {

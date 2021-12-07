@@ -17,7 +17,6 @@
   flex-direction: column;
   align-items: flex-start;
   width: 25rem;
-  // max-width: 25rem;
 
   background-color: $color-white;
 }
@@ -92,10 +91,6 @@
   }
 }
 
-.sub-navbar {
-  // width: 100%;
-}
-
 .sub-nav {
   &__link {
     display: block;
@@ -125,19 +120,9 @@
     }
   }
 
-  &__item--active {
-    cursor: default;
-    pointer-events: none;
-
-    &:hover {
-      background-color: transparent;
-    }
-  }
-
   &__item--active span {
     background-color: transparent;
     color: $color-primary;
-    cursor: default;
   }
 }
 
@@ -153,10 +138,6 @@
 
 // HEADER
 .header {
-  // position: fixed;
-  // top: 0;
-  // right: 2.5rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -338,8 +319,4 @@
     color: $color-white;
     font-size: 1.4rem;
   }
-}
-
-// CONTENT
-.content {
 }

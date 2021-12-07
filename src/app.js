@@ -28,7 +28,7 @@ app.use('/api/v1/products', productRoute);
 app.use('/api/v1/categories', categoryRoute);
 app.use('/api/v1/users', userRoute);
 app.all('*', (req, res, next) => {
-  const message = `Can't find ${req.originalUrl} on this server`;
+  const message = `Không thể tìm thấy địa chỉ ${req.originalUrl} trên server.`;
   const statusCode = StatusCodes.NOT_FOUND;
   next(new AppError(message, statusCode));
 });

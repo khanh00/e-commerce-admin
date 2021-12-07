@@ -20,3 +20,6 @@ html(lang='vi')
             span.logo__name Kookee
         .error__message= message
         i.error__icon.fas.fa-exclamation-circle
+        if code === 401
+          a(href='/login')
+            .btn Đăng nhập

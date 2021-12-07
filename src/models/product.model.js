@@ -104,6 +104,7 @@ const productSchema = new mongoose.Schema(
       trim: true,
       unique: true,
       required: [true, 'title: Tiêu đề không được để trống'],
+      validate: [/^[^+]+$/, 'title: Tiêu đề không được chứa "+"'],
     },
     title_noAccents: {
       type: String,
@@ -124,6 +125,7 @@ const productSchema = new mongoose.Schema(
 productSchema.index({
   title: 'text',
   title_noAccents: 'text',
+  isbn: 'text',
 });
 
 productSchema.pre('save', function (next) {

@@ -12,7 +12,7 @@ mongoose.connect(uri).then(() => console.log('Database Connected!'));
 const server = app.listen(port, () => console.log('App running...'));
 
 process.on('unhandledRejection', (err) => {
-  console.log('Unhandled rejection! Shutting down...');
+  console.log('Unhandled rejection');
   console.log(err.name, err.message);
   server.close(() => {
     process.exit(1);

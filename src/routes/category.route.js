@@ -1,8 +1,10 @@
 const express = require('express');
 const categoryController = require('../controllers/category.controller');
+const authController = require('../controllers/auth.controller');
 
 const router = express.Router();
 
+router.use(authController.protect);
 router
   .route('/')
   .get(categoryController.getAllCategory)

@@ -49,7 +49,7 @@ const getProduct = catchAsync(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
-    const message = 'No category found with that ID';
+    const message = 'Không tìm thấy sản phẩm với Id đã cho';
     const statusCode = StatusCodes.BAD_REQUEST;
     next(new AppError(message, statusCode));
   } else {
@@ -60,31 +60,40 @@ const getProduct = catchAsync(async (req, res, next) => {
   }
 });
 
-const createProduct = catchAsync(async (req, res, next) => {
+const createProduct = async (req, res, next) => {
   req.body.images = ['default.png'];
   if (req.files?.length > 0) {
     req.body.images = [...req.files.map((file) => file.filename)];
   }
-  const newProduct = await Product.create(req.body);
-  return res.status(StatusCodes.CREATED).json({
-    status: 'success',
-    data: { product: newProduct },
-  });
-});
+
+  try {
+    const newProduct = await Product.create(req.body);
+    res.status(StatusCodes.CREATED).json({
+      status: 'success',
+      data: { product: newProduct },
+    });
+  } catch (err) {
+    if (req.files?.length > 0) {
+      req.files.forEach(async (file) => {
+        if (fs.existsSync(file.path)) await promisify(fs.unlink)(file.path);
+      });
+    }
+    next(err);
+  }
+};
 
 const updateProduct = catchAsync(async (req, res, next) => {
+  if (req.files) req.body.images = req.files.map((file) => file.filename);
   const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
 
   if (!product) {
-    const message = 'No category found with that ID';
+    const message = 'Không thể tìm thấy sản phẩm với Id đã cho';
     const statusCode = StatusCodes.BAD_REQUEST;
     next(new AppError(message, statusCode));
   } else {
-    if (req.file) product.images = [...req.files.filename];
-
     res.status(StatusCodes.OK).json({
       status: 'success',
       data: { product },
@@ -96,12 +105,12 @@ const deleteProduct = catchAsync(async (req, res, next) => {
   const product = await Product.findByIdAndDelete(req.params.id);
 
   if (!product) {
-    const message = 'No category found with that ID';
+    const message = 'Không thể tìm thấy sản phẩm với Id đã cho';
     next(new AppError(message, StatusCodes.BAD_REQUEST));
   } else {
     product.images.forEach(async (image) => {
       if (image !== 'default.png')
-        await promisify(fs.unlink)(`public/img/products/${image}`);
+        await promisify(fs.unlink)(`src/assets/img/products/${image}`);
     });
     res.status(StatusCodes.NO_CONTENT).json({
       status: 'success',

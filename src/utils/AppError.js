@@ -1,5 +1,3 @@
-const { StatusCodes } = require('http-status-codes');
-
 class AppError extends Error {
   constructor(message, statusCode, stack, isOperational = true) {
     super(message);

@@ -27,12 +27,12 @@ const handleValidationErr = (err) => {
 };
 
 const handleJWTErr = () => {
-  const message = 'Invalid token. Please login again!';
+  const message = 'Token không hợp lệ. Hãy thử đăng nhập lại';
   return new AppError(message, StatusCodes.UNAUTHORIZED);
 };
 
 const handleTokenExpiredErr = () => {
-  const message = 'Your token has expired! Please log in again!';
+  const message = 'Token của bạn đã hết hạn. Vui lòng đăng nhập lại';
   return new AppError(message, StatusCodes.UNAUTHORIZED);
 };
 
@@ -47,6 +47,7 @@ const sendErrDev = (err, res) => {
 
 const renderErrDev = (err, res) => {
   res.status(err.statusCode).render('error', {
+    code: err.statusCode,
     title: 'Có gì đó không ổn',
     message: err.message,
   });
@@ -59,12 +60,7 @@ const sendErrProd = (err, res) => {
   });
 };
 
-const renderErrProd = (err, res) => {
-  res.status(err.statusCode).render('error', {
-    title: 'Có gì đó không ổn',
-    message: 'Đã xảy ra lỗi. Vui lòng thử lại!',
-  });
-};
+const renderErrProd = (err, res) => {};
 
 const handlerErrDev = (err, req, res) => {
   const errDev = err;
@@ -83,12 +79,14 @@ const handlerErrProd = (err, req, res) => {
   if (!errProd.isOperational) {
     errProd.statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
     errProd.status = 'error';
-    errProd.message = 'Something went wrong!';
+    errProd.message = 'Đã xảy ra lỗi. Vui lòng thử lại!';
   }
 
   if (req.originalUrl.startsWith('/api')) {
     sendErrProd(errProd, res);
-  } else renderErrProd(errProd, res);
+  } else {
+    renderErrProd(errProd, res);
+  }
 };
 
 const handlerErr = (err, req, res, next) => {

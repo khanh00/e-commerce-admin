@@ -45,13 +45,13 @@ const preSave = async function (next) {
   next();
 };
 
-const correctPassword = async function (cadidatePassword, userPassword) {
-  const isCorrect = await bcrypt.compare(cadidatePassword, userPassword);
+const correctPassword = async function (candidatePassword, userPassword) {
+  const isCorrect = await bcrypt.compare(candidatePassword, userPassword);
   return isCorrect;
 };
 
 const changedPasswordAfter = function (jwtTimestamp) {
-  let isChanged = true;
+  let isChanged = false;
 
   if (this.passwordChangedAt) {
     const changedTimestamp = this.passwordChangedAt.getTime() / 1000; // in second

@@ -25,6 +25,15 @@ const activeContent = () => {
   });
 };
 
+const removeFormError = () => {
+  $$('.form-header__error').forEach((formHeaderError) => {
+    formHeaderError.remove();
+  });
+  $$('.form-body__error').forEach((formBodyError) => {
+    formBodyError.remove();
+  });
+};
+
 const resetForm = () => {
   $('.form').reset();
   if ($('.form fieldset')) {
@@ -34,14 +43,7 @@ const resetForm = () => {
     URL.revokeObjectURL(imgWrapper.querySelector('img').src);
     imgWrapper.remove();
   });
-  const formBodyErrors = $$('.form-body__error');
-  formBodyErrors.forEach((formBodyError) => {
-    formBodyError.remove();
-  });
-  $$('.form input').forEach((input) => {
-    // eslint-disable-next-line no-param-reassign
-    input.value = '';
-  });
+  removeFormError();
   $('.form .btn--blue').textContent = 'Thêm';
   $('.form .btn--blue').id = 'add';
   activeHeading($('.form-header__heading:first-child'));
@@ -132,15 +134,6 @@ const renderFormError = (message) => {
       'beforeend',
       `<div class="form-header__error"></div>`
     );
-};
-
-const removeFormError = () => {
-  $$('.form-header__error').forEach((formHeaderError) => {
-    formHeaderError.remove();
-  });
-  $$('.form-body__error').forEach((formBodyError) => {
-    formBodyError.remove();
-  });
 };
 
 const getHTMLProductRow = (prod) => {

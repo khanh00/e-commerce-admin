@@ -215,6 +215,7 @@
     height: 0.8rem;
     border-radius: 50%;
     background-color: $color-secondary;
+    cursor: default;
   }
   &__heading {
     position: relative;
@@ -466,11 +467,11 @@
   margin-bottom: 1.4rem;
   width: 100%;
 }
+
 .filter {
   font-weight: 600;
   font-size: 1.6rem;
   text-transform: uppercase;
-  cursor: pointer;
 
   i {
     margin-right: 0.6rem;
@@ -518,6 +519,7 @@
 
     font-family: inherit;
     font-size: inherit;
+    color: inherit;
     border-radius: 0.4rem;
     border: 1px solid $color-grey-25;
     outline: none;

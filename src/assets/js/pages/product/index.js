@@ -15,12 +15,13 @@ let allProducts;
 let filter = '';
 let queryString = '';
 
-(async () => {
-  allProducts = await product.getAllProduct();
-  utils.renderSpinner($('.table__body'));
-  utils.updatePaginationInfo(allProducts.length);
-  productView.renderRows(allProducts.slice(0, 9));
-})();
+if (window.location.pathname === '/products')
+  (async () => {
+    allProducts = await product.getAllProduct();
+    utils.renderSpinner($('.table__body'));
+    utils.updatePaginationInfo(allProducts.length);
+    productView.renderRows(allProducts.slice(0, 9));
+  })();
 
 const getProducts = () => {
   const skip = (page - 1) * limit;
@@ -68,10 +69,10 @@ const createFormData = async () => {
   if (listPrice) formData.append('listPrice', listPrice);
   if (originalPrice) formData.append('originalPrice', originalPrice);
   if (allowSell) formData.append('allowSell', allowSell);
+  formData.append('updateAt', Date.now());
   [...$('#images').files].forEach((img) => {
     formData.append('images', img);
   });
-  formData.append('updateAt', Date.now());
 
   return formData;
 };
@@ -191,10 +192,10 @@ $('.search')?.addEventListener('submit', async (e) => {
     queryString = `?text[search]=${search}&score[meta]=textScore&`;
     allProducts = await product.getAllProduct(queryString);
   } else {
+    queryString = '';
     allProducts = await product.getAllProduct();
   }
 
-  filter = '';
   productView.resetFilter();
   page = 1;
   utils.updatePaginationInfo(allProducts.length, page, limit);
@@ -271,40 +272,37 @@ $('#limit')?.addEventListener('change', (e) => {
   productView.renderRows(getProducts());
 });
 
-$('.filter-option-list').addEventListener('click', async (e) => {
+$('.filter-option-list')?.addEventListener('click', async (e) => {
   e.preventDefault();
   if (
     (e.target.classList.contains('option__name') &&
       !e.target.closest('.option__selected')) ||
     e.target.classList.contains('btn')
   ) {
+    if (!queryString) queryString = '?';
     const el = e.target.closest('.filter-option');
 
     if (el.dataset.categoryFilter) {
       const cat = e.target.textContent;
       if (cat === 'Thể loại') {
-        queryString = queryString.replace(/category=.*?&/, '');
+        filter = filter.replace(/category=.*?&/, '');
       } else {
         const catId = (await category.getAllCategory(`?name=${cat}`))[0]._id;
-        if (!queryString) queryString = '?';
-        if (queryString.search('category') !== -1) {
-          queryString = queryString.replace(/(?<=category=)(.*?)(?=&)/, catId);
-        } else queryString += `category=${catId}&`;
+        if (filter.search('category') !== -1) {
+          filter = filter.replace(/(?<=category=)(.*?)(?=&)/, catId);
+        } else filter += `category=${catId}&`;
       }
     }
 
     if (el.dataset.allowSellFilter) {
       const allowSell = e.target.textContent;
       if (allowSell === 'Trạng thái') {
-        queryString = queryString.replace(/allowSell=.*?&/, '');
+        filter = filter.replace(/allowSell=.*?&/, '');
       } else {
         const isAllowSell = e.target.textContent.startsWith('Đ');
-        if (queryString.search('allowSell') !== -1) {
-          queryString = queryString.replace(
-            /(?<=allowSell=)(.*?)(?=&)/,
-            isAllowSell
-          );
-        } else queryString += `allowSell=${isAllowSell}&`;
+        if (filter.search('allowSell') !== -1) {
+          filter = filter.replace(/(?<=allowSell=)(.*?)(?=&)/, isAllowSell);
+        } else filter += `allowSell=${isAllowSell}&`;
       }
     }
 
@@ -312,46 +310,31 @@ $('.filter-option-list').addEventListener('click', async (e) => {
       const from = $('#fromListPrice').value;
       const to = $('#toListPrice').value;
       if (!from || !to) {
-        queryString = queryString.replace(/listPrice\[gte\]=.*?&/, '');
-        queryString = queryString.replace(/listPrice\[lte\]=.*?&/, '');
-      } else if (queryString.search('listPrice') !== -1) {
-        queryString = queryString.replace(
-          /(?<=listPrice\[gte\]=)(.*?)(?=&)/,
-          from
-        );
-        queryString = queryString.replace(
-          /(?<=listPrice\[lte\]=)(.*?)(?=&)/,
-          to
-        );
-      } else queryString += `listPrice[gte]=${from}&listPrice[lte]=${to}&`;
+        filter = filter.replace(/listPrice\[gte\]=.*?&/, '');
+        filter = filter.replace(/listPrice\[lte\]=.*?&/, '');
+      } else if (filter.search('listPrice') !== -1) {
+        filter = filter.replace(/(?<=listPrice\[gte\]=)(.*?)(?=&)/, from);
+        filter = filter.replace(/(?<=listPrice\[lte\]=)(.*?)(?=&)/, to);
+      } else filter += `listPrice[gte]=${from}&listPrice[lte]=${to}&`;
     }
 
     if (el.dataset.originalPriceFilter) {
       const from = $('#fromOriginalPrice').value;
       const to = $('#toOriginalPrice').value;
       if (!from || !to) {
-        queryString = queryString.replace(/originalPrice\[gte\]=.*?&/, '');
-        queryString = queryString.replace(/originalPrice\[lte\]=.*?&/, '');
-      } else if (queryString.search('originalPrice') !== -1) {
-        queryString = queryString.replace(
-          /(?<=originalPrice\[gte\]=)(.*?)(?=&)/,
-          from
-        );
-        queryString = queryString.replace(
-          /(?<=originalPrice\[lte\]=)(.*?)(?=&)/,
-          to
-        );
-      } else
-        queryString += `originalPrice[gte]=${from}&originalPrice[lte]=${to}&`;
+        filter = filter.replace(/originalPrice\[gte\]=.*?&/, '');
+        filter = filter.replace(/originalPrice\[lte\]=.*?&/, '');
+      } else if (filter.search('originalPrice') !== -1) {
+        filter = filter.replace(/(?<=originalPrice\[gte\]=)(.*?)(?=&)/, from);
+        filter = filter.replace(/(?<=originalPrice\[lte\]=)(.*?)(?=&)/, to);
+      } else filter += `originalPrice[gte]=${from}&originalPrice[lte]=${to}&`;
     }
 
     page = 1;
     sort = '';
     utils.renderSpinner($('.table__body'));
-    allProducts = await product.getAllProduct(queryString);
+    allProducts = await product.getAllProduct(queryString + filter);
     utils.updatePaginationInfo(allProducts.length, page, limit);
+    productView.renderRows(getProducts());
   }
-  productView.renderRows(getProducts());
 });
-
-// thong bao sua thanh cong

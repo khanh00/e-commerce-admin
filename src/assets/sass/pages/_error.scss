@@ -15,7 +15,7 @@
   }
 
   &__message {
-    margin-top: 3rem;
+    margin-block: 3rem 1rem;
     font-size: 1.6rem;
   }
 
@@ -25,5 +25,9 @@
     right: 0;
     font-size: 20rem;
     color: rgba($color-primary, 0.1);
+  }
+
+  a {
+    text-decoration: none;
   }
 }

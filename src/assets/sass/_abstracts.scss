@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'Aquire';
-  src: url(../css/fonts/Aquire-BW0ox.otf);
-}
-
 // VARIABLES
 $color-primary: #0099e5;
 $color-primary-light: #e5f6ff;
@@ -25,6 +20,11 @@ $font-logo: 'Aquire';
 $font-primary: 'Roboto';
 
 $easeOutCirc: cubic-bezier(0, 0.55, 0.45, 1);
+
+@font-face {
+  font-family: 'Aquire';
+  src: url(../css/fonts/Aquire-BW0ox.otf);
+}
 
 // UTILS
 .hidden {

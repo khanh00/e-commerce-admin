@@ -54,7 +54,7 @@
   font-size: 1.6rem;
   font-weight: 600;
   line-height: 1.6;
-  color: inherit;
+  color: $color-grey-30;
   background-color: $color-white;
   border: 1px solid $color-grey-20;
   border-radius: 0.5rem;
@@ -235,6 +235,7 @@
   margin-top: -1rem;
   padding: 1.6rem 1rem 0.6rem 1rem;
 
+  color: $color-grey-40;
   backdrop-filter: blur(5px);
   border: 1px solid $color-grey-10;
   border-radius: 1rem;
@@ -251,7 +252,7 @@
   }
 
   &--error {
-    background-color: rgba($color-secondary, 0.2);
+    background-color: rgba($color-secondary, 0.4);
   }
 
   &--error &__icon {

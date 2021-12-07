@@ -160,3 +160,7 @@ notifications.forEach((notification) => {
     toggleSortIcon
   );
 });
+
+window.addEventListener('load', () => {
+  $('body').classList.remove('preload');
+});
