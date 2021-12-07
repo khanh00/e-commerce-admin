@@ -122,7 +122,6 @@ $('.form')?.addEventListener('click', async (e) => {
       const formData = await createFormData();
       const prod = await product.getAllProduct(`?title=${currentTitle}`);
       const newProd = await product.updateProduct(prod[0]._id, formData);
-
       currentTitle = newProd.title;
 
       utils.removeSpinner($('.form'));

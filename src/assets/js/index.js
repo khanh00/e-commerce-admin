@@ -1,3 +1,3 @@
 import './script';
-import './pages/product';
-import './pages/user';
+import './pages/product/index';
+import './pages/user/index';

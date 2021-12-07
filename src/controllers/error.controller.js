@@ -60,7 +60,13 @@ const sendErrProd = (err, res) => {
   });
 };
 
-const renderErrProd = (err, res) => {};
+const renderErrProd = (err, res) => {
+  res.status(err.statusCode).render('error', {
+    code: err.statusCode,
+    title: 'Có gì đó không ổn',
+    message: err.message,
+  });
+};
 
 const handlerErrDev = (err, req, res) => {
   const errDev = err;
