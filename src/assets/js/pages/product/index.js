@@ -229,11 +229,13 @@ const SORT = [
       if (queryString) {
         if (queryString.search('sort') !== -1) {
           queryString = queryString.replace(/(?<=sort=)(.*?)(?=&)/, sort);
-        } else queryString += `sort=${sort}&`;
+        } else {
+          queryString += `sort=${sort}&`;
+        }
       } else queryString = `?sort=${sort}&`;
 
       utils.renderSpinner($('.table__body'));
-      allProducts = await product.getAllProduct(queryString);
+      allProducts = await product.getAllProduct(queryString + filter);
       productView.renderRows(getProducts());
     }
   );
