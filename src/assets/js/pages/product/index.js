@@ -228,7 +228,7 @@ const SORT = [
 
       if (queryString) {
         if (queryString.search('sort') !== -1) {
-          queryString = queryString.replace(/(?<=sort=)(.*?)(?=&)/, sort);
+          queryString = queryString.replace(/sort=(.*?)&/, `sort=${sort}&`);
         } else {
           queryString += `sort=${sort}&`;
         }
@@ -290,7 +290,7 @@ $('.filter-option-list')?.addEventListener('click', async (e) => {
       } else {
         const catId = (await category.getAllCategory(`?name=${cat}`))[0]._id;
         if (filter.search('category') !== -1) {
-          filter = filter.replace(/(?<=category=)(.*?)(?=&)/, catId);
+          filter = filter.replace(/category=(.*?)&/, `category=${catId}&`);
         } else filter += `category=${catId}&`;
       }
     }
@@ -302,7 +302,10 @@ $('.filter-option-list')?.addEventListener('click', async (e) => {
       } else {
         const isAllowSell = e.target.textContent.startsWith('Đ');
         if (filter.search('allowSell') !== -1) {
-          filter = filter.replace(/(?<=allowSell=)(.*?)(?=&)/, isAllowSell);
+          filter = filter.replace(
+            /allowSell=(.*?)&/,
+            `allowSell=${isAllowSell}&`
+          );
         } else filter += `allowSell=${isAllowSell}&`;
       }
     }
@@ -314,8 +317,14 @@ $('.filter-option-list')?.addEventListener('click', async (e) => {
         filter = filter.replace(/listPrice\[gte\]=.*?&/, '');
         filter = filter.replace(/listPrice\[lte\]=.*?&/, '');
       } else if (filter.search('listPrice') !== -1) {
-        filter = filter.replace(/(?<=listPrice\[gte\]=)(.*?)(?=&)/, from);
-        filter = filter.replace(/(?<=listPrice\[lte\]=)(.*?)(?=&)/, to);
+        filter = filter.replace(
+          /listPrice\[gte\]=(.*?)&/,
+          `listPrice[gte]=${from}&`
+        );
+        filter = filter.replace(
+          /listPrice\[lte\]=(.*?)&/,
+          `listPrice[lte]=${to}&`
+        );
       } else filter += `listPrice[gte]=${from}&listPrice[lte]=${to}&`;
     }
 
@@ -326,8 +335,14 @@ $('.filter-option-list')?.addEventListener('click', async (e) => {
         filter = filter.replace(/originalPrice\[gte\]=.*?&/, '');
         filter = filter.replace(/originalPrice\[lte\]=.*?&/, '');
       } else if (filter.search('originalPrice') !== -1) {
-        filter = filter.replace(/(?<=originalPrice\[gte\]=)(.*?)(?=&)/, from);
-        filter = filter.replace(/(?<=originalPrice\[lte\]=)(.*?)(?=&)/, to);
+        filter = filter.replace(
+          /originalPrice\[gte\]=(.*?)&/,
+          `originalPrice[gte]=${from}&`
+        );
+        filter = filter.replace(
+          /originalPrice\[lte\]=(.*?)&/,
+          `originalPrice[lte]=${to}&`
+        );
       } else filter += `originalPrice[gte]=${from}&originalPrice[lte]=${to}&`;
     }
 
