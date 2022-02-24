@@ -4,7 +4,7 @@ const authController = require('../controllers/auth.controller');
 
 const router = express.Router();
 
-router.use(authController.protect);
+router.use(authController.checkIfLoggedIn);
 router
   .route('/')
   .get(productController.getAllProducts)
@@ -14,6 +14,6 @@ router
   .route('/:id')
   .get(productController.getProduct)
   .patch(productController.uploadImages, productController.updateProduct)
-  .delete(productController.deleteProduct);
+  .delete(authController.checkIfAdmin, productController.deleteProduct);
 
 module.exports = router;

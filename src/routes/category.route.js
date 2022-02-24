@@ -4,7 +4,7 @@ const authController = require('../controllers/auth.controller');
 
 const router = express.Router();
 
-router.use(authController.protect);
+router.use(authController.checkIfLoggedIn);
 router
   .route('/')
   .get(categoryController.getAllCategory)

@@ -158,7 +158,7 @@ $('#delete')?.addEventListener('click', async (e) => {
     utils.updatePaginationInfo(allProducts.length, page, limit);
   } catch (err) {
     utils.removeSpinner($('.table__body'));
-    utils.renderNotification('error', 'Xóa thất bại');
+    utils.renderNotification('error', err.response.data.message);
   }
 });
 

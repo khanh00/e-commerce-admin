@@ -73,7 +73,7 @@ const logout = (req, res) => {
   });
 };
 
-const protect = catchAsync(async (req, res, next) => {
+const checkIfLoggedIn = catchAsync(async (req, res, next) => {
   const bearer = req.headers.authorization?.split(' ')[0];
   const token = req.headers.authorization?.split(' ')[1] || req.cookies?.jwt;
 
@@ -99,9 +99,22 @@ const protect = catchAsync(async (req, res, next) => {
   return next();
 });
 
+const checkIfAdmin = catchAsync(async (req, res, next) => {
+  const { id } = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+  const currentUser = await User.findOne({ _id: id });
+
+  if (currentUser.role !== 'admin') {
+    const message = 'Chỉ admin mới có thể thực hiện điều này';
+    return next(new AppError(message, StatusCodes.UNAUTHORIZED));
+  }
+
+  return next();
+});
+
 module.exports = {
   signup,
   login,
   logout,
-  protect,
+  checkIfLoggedIn,
+  checkIfAdmin,
 };
