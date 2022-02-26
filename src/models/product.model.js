@@ -118,6 +118,11 @@ const productSchema = new mongoose.Schema(
       type: Number,
       validate: [/^[0-9]*$/, 'weight: Trọng lượng không hợp lệ'],
     },
+    owner: {
+      type: String,
+      enum: ['admin', 'user'],
+      default: 'user',
+    },
   },
   { collation: { locale: 'vi', strength: 1 } }
 );

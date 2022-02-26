@@ -2,11 +2,13 @@ const { StatusCodes } = require('http-status-codes');
 const multer = require('multer');
 const fs = require('fs');
 const { promisify } = require('util');
+const jwt = require('jsonwebtoken');
 
 const Product = require('../models/product.model');
 const ApiFeatures = require('../utils/ApiFeatures');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
+const User = require('../models/user.model');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -103,7 +105,6 @@ const updateProduct = catchAsync(async (req, res, next) => {
 
 const deleteProduct = catchAsync(async (req, res, next) => {
   const product = await Product.findByIdAndDelete(req.params.id);
-
   if (!product) {
     const message = 'Không thể tìm thấy sản phẩm với Id đã cho';
     next(new AppError(message, StatusCodes.BAD_REQUEST));
@@ -119,6 +120,19 @@ const deleteProduct = catchAsync(async (req, res, next) => {
   }
 });
 
+const isOwnerProduct = catchAsync(async (req, res, next) => {
+  const { id } = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+  const currentUser = await User.findById(id);
+  const product = await Product.findById(req.params.id);
+
+  if (currentUser.role !== product.owner) {
+    const message = 'Bạn không phải là chủ sở hữu';
+    return next(new AppError(message, StatusCodes.UNAUTHORIZED));
+  }
+
+  return next();
+});
+
 module.exports = {
   uploadImages,
   getAllProducts,
@@ -126,4 +140,5 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
+  isOwnerProduct,
 };

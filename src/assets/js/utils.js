@@ -42,8 +42,9 @@ const renderNotification = (status, message) => {
     setTimeout(() => {
       $(`.notification--${status} .notification__message`).textContent = '';
     }, 1000);
-  }, 5000);
+  }, 2400);
 };
+
 const renderSpinner = (element) => {
   const html = `
     <div class="spinner">

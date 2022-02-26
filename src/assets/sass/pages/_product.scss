@@ -95,14 +95,14 @@
 
   &__action {
     position: absolute;
-    top: 30%;
-    right: 70%;
+    top: 0%;
+    right: 100%;
 
     width: 10rem;
     padding: 0.6rem 1rem;
 
     background-color: $color-white;
-    box-shadow: 0 0.4rem 0.8rem $color-grey-20;
+    box-shadow: 0 0.4rem 0.8rem $color-grey-25;
     border: 1px solid $color-grey-20;
     border-radius: 0.4rem;
     cursor: pointer;

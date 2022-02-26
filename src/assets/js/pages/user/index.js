@@ -15,7 +15,7 @@ $('#login')?.addEventListener('submit', async (e) => {
 
     const status = await user.login(email, password);
     if (status === 'success') {
-      window.location.assign('/');
+      window.location.assign('/products');
     }
   } catch (err) {
     userView.renderErrorLogin(err);

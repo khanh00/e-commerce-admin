@@ -99,22 +99,9 @@ const checkIfLoggedIn = catchAsync(async (req, res, next) => {
   return next();
 });
 
-const checkIfAdmin = catchAsync(async (req, res, next) => {
-  const { id } = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
-  const currentUser = await User.findOne({ _id: id });
-
-  if (currentUser.role !== 'admin') {
-    const message = 'Chỉ admin mới có thể thực hiện điều này';
-    return next(new AppError(message, StatusCodes.UNAUTHORIZED));
-  }
-
-  return next();
-});
-
 module.exports = {
   signup,
   login,
   logout,
   checkIfLoggedIn,
-  checkIfAdmin,
 };
