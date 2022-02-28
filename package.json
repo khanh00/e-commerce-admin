@@ -2,14 +2,10 @@
   "name": "e-commerce-admin",
   "version": "1.0.0",
   "scripts": {
-    "start": "NODE_ENV=production node src/server.js",
+    "start": "node src/server.js",
     "start:dev": "nodemon src/server.js",
-    "watch:sass": "parcel watch src/assets/sass/main.scss --dist-dir src/assets/css/dist",
-    "watch:js": "parcel watch src/assets/js/index.js --dist-dir src/assets/js/dist",
-    "build:sass": "parcel build src/assets/sass/main.scss --dist-dir src/assets/css/dist",
-    "build:js": "parcel build src/assets/js/index.js --dist-dir src/assets/js/dist",
-    "watch": "npm-run-all -p watch:sass watch:js",
-    "build": "npm-run-all build:sass build:js"
+    "watch": "parcel watch src/assets/js/index.js src/assets/sass/main.scss src/assets/img/*",
+    "build": "parcel build src/assets/js/index.js src/assets/sass/main.scss src/assets/img/*"
   },
   "author": "khanh",
   "license": "ISC",

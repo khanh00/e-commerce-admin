@@ -78,8 +78,7 @@ const checkIfLoggedIn = catchAsync(async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1] || req.cookies?.jwt;
 
   if (bearer !== 'Bearer' && !token) {
-    const message = 'Bạn chưa đăng nhập! Vui lòng đăng nhập để truy cập';
-    return next(new AppError(message, StatusCodes.UNAUTHORIZED));
+    res.redirect('/login');
   }
 
   const decode = await promisify(jwt.verify)(token, process.env.JWT_SECRET);

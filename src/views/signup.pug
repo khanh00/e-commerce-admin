@@ -7,9 +7,9 @@ html(lang='vi')
     link(rel='preconnect' href='https://fonts.googleapis.com')
     link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
     link(href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300&display=swap' rel='stylesheet')
-    link(rel='icon' type='image/png' sizes='32x32' href='./img/favicon-32x32.png')
+    link(rel='icon' type='image/png' sizes='32x32' href='/img/favicon-32x32.png')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css' integrity='sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==' crossorigin='anonymous' referrerpolicy='no-referrer')
-    link(rel='stylesheet' href='./css/dist/main.css')
+    link(rel='stylesheet' href='/sass/main.css')
     title Tạo tài khoản | Kookee 
   body
     main.login-container
@@ -28,10 +28,9 @@ html(lang='vi')
           label.login__label(for='password') Nhập lại mật khẩu
           input#passwordConfirm.login__input(type='password', minlength='8' required placeholder='••••••••')
           button.login__btn.btn.btn--blue(type='submit') Tạo tài khoản
-        p.display-n.login__error
-          i.fas.fa-exclamation-circle
+        p.login__error Chức năng này đang được phát triển
         p.login__paragraph
           | Đã có tài khoản? 
           a.login__link(href='/login') Đăng nhập
           | .
-    script(type='module', src='./js/dist/index.js')
+    script(src='/js/index.js')

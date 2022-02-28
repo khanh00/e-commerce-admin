@@ -46,16 +46,20 @@ const renderNotification = (status, message) => {
 };
 
 const renderSpinner = (element) => {
+  if (element.querySelector('.spinner')) {
+    element.querySelector('.spinner').remove();
+  }
+
   const html = `
     <div class="spinner">
       <i class="fas fa-circle-notch"></i>
     </div>
     `;
-  element?.insertAdjacentHTML('afterbegin', html);
+  element.insertAdjacentHTML('afterbegin', html);
 };
 
 const removeSpinner = (element) => {
-  element?.querySelector('.spinner').remove();
+  element.querySelector('.spinner').remove();
 };
 
 export {
