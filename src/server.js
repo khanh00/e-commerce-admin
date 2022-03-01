@@ -1,7 +1,8 @@
+const path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: './.env' });
+dotenv.config({ path: path.join(__dirname, '../.env') });
 const app = require('./app');
 
 const { DB_URI, PORT } = process.env;
