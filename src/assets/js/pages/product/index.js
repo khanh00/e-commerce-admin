@@ -196,9 +196,10 @@ $('.search')?.addEventListener('submit', async (e) => {
   }
 
   productView.resetFilter();
+  filter = '';
   document
     .querySelector('.table__icon-sort--active')
-    .classList.remove('table__icon-sort--active');
+    ?.classList.remove('table__icon-sort--active');
   page = 1;
   utils.updatePaginationInfo(allProducts.length, page, limit);
   productView.renderRows(getProducts());
