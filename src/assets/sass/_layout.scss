@@ -3,10 +3,6 @@
   width: 100%;
   height: 100%;
   transition: all 0.2s;
-
-  // @media screen and (max-width: 1024px) {
-  // transform: translateX(-25rem);
-  // }
 }
 
 .root--display-sidebar {
@@ -27,10 +23,6 @@
   width: calc(100% - 25rem);
   flex: 1;
   transition: all 0.2s;
-
-  // @media screen and (max-width: 1024px) {
-  //   width: 100%;
-  // }
 }
 
 // SIDEBAR
@@ -49,13 +41,6 @@
     transform: translateX(-25rem);
   }
 }
-
-// .sidebar--active {
-//   opacity: 1;
-//   visibility: visible;
-//   width: 25rem;
-//   transform: translateX(0);
-// }
 
 .logo-container {
   margin: 2rem 0 4rem;
