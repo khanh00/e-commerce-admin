@@ -164,3 +164,7 @@ notifications.forEach((notification) => {
 window.addEventListener('load', () => {
   $('body').classList.remove('preload');
 });
+
+$('.bars-icon').addEventListener('click', () => {
+  $('.root').classList.toggle('root--display-sidebar');
+});

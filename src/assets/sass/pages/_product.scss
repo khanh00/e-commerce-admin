@@ -4,12 +4,18 @@
 
 .header-section {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
   margin-bottom: 2rem;
 
   &__heading {
     color: $color-grey-40;
     font-size: 2.6rem;
     margin-right: auto;
+  }
+
+  button {
+    margin-bottom: 1rem;
   }
 }
 
@@ -192,6 +198,7 @@
 
   width: 96vw;
   max-width: 96rem;
+  max-height: calc(90vh - 2rem);
   margin-top: 4rem;
   padding: 2rem calc(1.6rem + 1vw) 2rem calc(1.6rem + 1vw);
 
@@ -199,6 +206,7 @@
   border-radius: 1rem;
   box-shadow: 0 5rem 10rem rgba($color-black, 0.1);
 
+  overflow-y: auto;
   transition: all 0.3s $easeOutCirc;
 }
 
@@ -226,7 +234,7 @@
     flex-wrap: wrap;
 
     color: $color-grey-25;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 3vw, 1.8rem);
     cursor: pointer;
 
     i {
@@ -280,6 +288,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      gap: 1rem;
     }
   }
 
@@ -348,8 +357,13 @@
 
   &__wrapper {
     position: relative;
-    width: 40rem;
+    width: 46%;
+    min-width: 30rem;
     margin: 1.4rem 0 1.4rem 0;
+
+    @media screen and (max-width: 44em) {
+      width: 100%;
+    }
 
     span {
       color: $color-secondary;
@@ -481,7 +495,7 @@
 .filter-option-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 2.4rem;
+  gap: 1.4rem;
   margin-bottom: 2.5rem;
 
   .name {
