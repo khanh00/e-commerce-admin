@@ -125,7 +125,6 @@ const productSchema = new mongoose.Schema({
 });
 
 productSchema.index({
-  title: 'text',
   title_noAccents: 'text',
   isbn: 'text',
 });

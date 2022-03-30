@@ -206,7 +206,7 @@ $('.search')?.addEventListener('submit', async (e) => {
 });
 
 const SORT = [
-  'title',
+  'title_noAccents',
   'category',
   'listPrice',
   'originalPrice',
